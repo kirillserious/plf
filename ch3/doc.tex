@@ -1,0 +1,113 @@
+\section{Свойства преобразования Фурье}
+
+В этом разделе мы опишем основные свойства преобразования~Фурье и докажем наиболее интересные из них.
+Прежде всего, напомним внешний вид преобразования:
+$$
+        F[f] (\lambda) = \int\limits_{-\infty}^{+\infty}f(t)e^{-i\lambda t}\, dt,
+$$
+где $f \in \mbox{L}_1(-\infty,\,+\infty)$, то есть функция~$f$ интегрируема по Риману (Лебегу) на всей числовой прямой и выполнено условие
+$$
+        \int\limits_{-\infty}^{+\infty}|f(t)|\,dt < +\infty. 
+$$
+
+\begin{remark}
+        Принадлежность функции $f$ классу $\mbox{L}_1$ гарантирует существование ее преобразования~Фурье~$F[f]$.
+\end{remark}
+
+Для начала выпишим свойства, которые напрямую следуют из определения: линейность, масштабируемость и сдвиг. Мы не будем долго на них останавливаться.
+\begin{enumerate}
+        \item \textbf{Линейность.}
+$$
+        F[\alpha f_1 + \beta f_2]
+=
+        \alpha F[f_1] + \beta F[f_2],
+\qquad
+        \forall f_1,f_2 \in \mbox{L}_1,\,\forall \alpha,\beta \in \SetR.
+$$
+        \item \textbf{Сдвиг.}
+$$
+        F[f(t - t_0)] = e^{-\lambda t_0}\cdot F[f],
+$$
+$$
+        F[e^{i\lambda_0 t}\cdot f(t)] = F[f]\cdot(\lambda - \lambda_0).
+$$
+        \item \textbf{Масштабируемость.}
+$$
+        F[f(\alpha t)](\lambda) = \frac{1}{|\alpha|}F[f(t)]\left(\frac{\lambda}{\alpha}\right),
+\qquad
+        \forall \alpha \in \SetR,\,\alpha \neq 0.
+$$
+        \item \textbf{О четности.} Если функция~$f$ является четной, то ее образ~$F[f]$ будет действительной функцией. Если же $f$~--- нечетная, то образ~$F[f]$ будет чисто мнимой функцией.
+\end{enumerate}
+
+Теперь перейдем к более интересным свойствам. Далее каждая теорема, следствие или замечание будут являться свойствами преобразования~Фурье. Большая часть из них будет доказана.
+
+\begin{theorem}
+        Рассмотрим последовательность функций из класса $\mathrm{L}_1$, стремящююся по норме $\mathrm{L}_1$ к некоторой функции $f$ из того же класса, то есть
+$$
+        \{f_n\}_{n=1}^{\infty},\;f_n \in \mathrm{L}_1(-\infty,\,+\infty)
+\quad : \quad
+        f_n \xrightarrow[n\to\infty]{\mathrm{L}_1} f \in \mathrm{L}_1.
+$$
+Тогда
+$$
+        F[f_n] \rightrightarrows F[f].
+$$
+\end{theorem}
+\begin{proof} Приведем несложные выкладки:
+\begin{multline*}
+        \sup\limits_{\lambda}|F[f_m](\lambda) - F[f_n](\lambda)| = \\
+        =\sup\limits_\lambda\left|\int\limits_{-\infty}^{+\infty}(f_m(t) - f_n(t))e^{-i\lambda t}\, dt\right| \leqslant \\
+        \leqslant\int\limits_{-\infty}^{+\infty}|f_m(t) - f_n(t)|\,dt < \varepsilon.
+\end{multline*}
+\end{proof}
+
+\begin{theorem}
+        Преобразование Фурье $F[f]$ есть непрерывная ограниченная функция.
+\end{theorem}
+\begin{proof}
+        На самом деле ограниченность мы нечаянно вывели в предыдущей теореме. Действительно,
+$$
+        |F[f](\lambda)| = \left|\int\limits_{-\infty}^{+\infty} f(t) e^{-i\lambda t}\,dt\right| \leqslant \int\limits_{-\infty}^{+\infty}|f(t)|\,dt = \const.
+$$
+        
+        С непрерывностью дела обстоят куда сложнее. Здесь нам придется записать наше преобразование в виде
+$$
+        F[f](\lambda) = \int\limits_{-\infty}^{+\infty}f(t)\cos(\lambda t)\,dt - i\int\limits_{-\infty}^{+\infty}f(t)\sin(\lambda t)\,dt
+$$
+        и сослаться на книгу А.~М.~Тер--Крикорова, М.~И.~Шабунина <<Курс математического анализа,>> где на 645 странице доказана непрерывность каждого из кусочков.
+\end{proof}
+\begin{remark}
+        Из последней теоремы следует, например, что
+$$
+        F[f](\lambda)\xrightarrow[|\lambda|\to\infty]{} 0.
+$$
+\end{remark}
+
+Теперь рассмотрим специальный вид функций, который часто встречается на практике непрерывные и дифференцируемые функции.
+
+\begin{theorem}
+        Пусть функция $f$ непрерывно дифференцируема, абсолютно интегрируема, и ее производная так же абсолютно интегрируема, то есть\footnote{Теорема ходит в интернете в нескольких вариантах условий: совершенно не понятно, $f$ или $f'$ должна быть непрерывной или интегрируемой. Причем доказательства везде одинаковые. Здесь приведен вариант к.ф.-м.н. доцента И.~В.~Рублева.}
+$$
+        f \in \mathrm{C}^1(-\infty,\,+\infty)\,\cap\,\mathrm{L}_1(-\infty,\,+\infty),\;f' \in \mathrm{L}_1(-\infty,\,+\infty)
+$$
+        Тогда
+$$
+        F[f'](\lambda) = i\lambda \cdot F[f](\lambda).
+$$
+\end{theorem}
+\begin{proof}
+        Предствавим функцию в виде
+$$
+        f(t) = f(0) + \int\limits_{0}^{t} f'(t)\,dt.
+$$
+        Из сходимости интеграла $\int_0^{+\infty}f'(t)\,dt$ следует существование пределов $\lim_{t\to+\infty}f(t)$ и $\lim_{t\to-\infty}f(t)$. Они не могут быть отличными от нуля в силу сходимости интеграла $\int_{-\infty}^{+\infty}|f(t)|\,dt$. С помощью интегрировани по частям получаем
+\begin{multline*}
+        F[f'](\lambda) = \frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}f'(t)e^{-i\lambda t}\,dt=\\
+        =
+        \left.\frac{1}{\sqrt{2\pi}}f(t)e^{-i\lambda t}\right|_{-\infty}^{+\infty}
+        +
+        \frac{i\lambda}{\sqrt{2\pi}}\int\limits_{-\infty}^{+\infty}f'(t)e^{-i\lambda t}\,dt
+        = i\lambda\cdot F[f](\lambda).
+\end{multline*}
+\end{proof}
