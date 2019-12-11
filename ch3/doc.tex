@@ -87,7 +87,7 @@ $$
 Теперь рассмотрим специальный вид функций, который часто встречается на практике непрерывные и дифференцируемые функции.
 
 \begin{theorem}
-        Пусть функция $f$ непрерывно дифференцируема, абсолютно интегрируема, и ее производная так же абсолютно интегрируема, то есть\footnote{Теорема ходит в интернете в нескольких вариантах условий: совершенно не понятно, $f$ или $f'$ должна быть непрерывной или интегрируемой. Причем доказательства везде одинаковые. Здесь приведен вариант к.ф.-м.н. доцента И.~В.~Рублева.}
+        Пусть функция $f$ непрерывно дифференцируема, абсолютно интегрируема, и ее производная так же абсолютно интегрируема, то есть\footnote{Теорема ходит в интернете в нескольких вариантах условий: совершенно не понятно, $f$ или $f'$ должна быть непрерывной или интегрируемой. Причем доказательства везде примерно одинаковые. Здесь приведен вариант к.ф.-м.н. доцента И.~В.~Рублева.}
 $$
         f \in \mathrm{C}^1(-\infty,\,+\infty)\,\cap\,\mathrm{L}_1(-\infty,\,+\infty),\;f' \in \mathrm{L}_1(-\infty,\,+\infty)
 $$
@@ -101,7 +101,7 @@ $$
 $$
         f(t) = f(0) + \int\limits_{0}^{t} f'(t)\,dt.
 $$
-        Из сходимости интеграла $\int_0^{+\infty}f'(t)\,dt$ следует существование пределов $\lim_{t\to+\infty}f(t)$ и $\lim_{t\to-\infty}f(t)$. Они не могут быть отличными от нуля в силу сходимости интеграла $\int_{-\infty}^{+\infty}|f(t)|\,dt$. С помощью интегрировани по частям получаем
+        Из сходимости интеграла $\int_0^{+\infty}f'(t)\,dt$ следует существование пределов $\lim_{t\to+\infty}f(t)$ и $\lim_{t\to-\infty}f(t)$. Они не могут быть отличными от нуля в силу сходимости интеграла $\int_{-\infty}^{+\infty}|f(t)|\,dt$. С помощью интегрирования по частям получаем
 \begin{multline*}
         F[f'](\lambda) = \frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}f'(t)e^{-i\lambda t}\,dt=\\
         =
@@ -111,3 +111,88 @@ $$
         = i\lambda\cdot F[f](\lambda).
 \end{multline*}
 \end{proof}
+\begin{remark}
+        Как следствие, получаем более занятную формулу:
+$$
+        \mbox{Пусть } f \in \mathrm{C}^{k-1}(-\infty,\,+\infty),\quad \exists f^{(k)}:f^{(k)}\in\mathrm{L}_1(-\infty,\,+\infty), \mbox{ тогда} 
+$$
+$$
+        F[f^{(k)}](\lambda) = (i\lambda)^k\cdot F[f].
+$$
+\end{remark}
+
+\begin{theorem}
+        Пусть функция $f$ непрерывно дифференцируема, абсолютно интегрируема, и ее производная так же абсолютно интегрируема, то есть
+$$
+        f \in \mathrm{C}^1(-\infty,\,+\infty)\,\cap\,\mathrm{L}_1(-\infty,\,+\infty),\;f' \in \mathrm{L}_1(-\infty,\,+\infty)
+$$
+        Тогда
+$$
+        |F[f](\lambda)| \leqslant \frac{C}{|\lambda|}
+$$
+\end{theorem}
+\begin{proof}
+$$
+        \left|\int\limits_{-T}^{+T} f(t) e^{-i\lambda t}\,dt\right|
+        = \left.\frac{f(t)e^{-i\lambda t}}{-i\lambda}\right|_{-T}^{+T} + \frac{1}{\lambda}\int\limits_{-T}^{+T} f(t) e^{-i\lambda t}\,dt
+$$
+\end{proof}
+\begin{remark}
+        Как следствие, получаем более занятную формулу:
+$$
+        \mbox{Пусть } f \in \mathrm{C}^{k-1}(-\infty,\,+\infty),\quad \exists f^{(k)}:f^{(k)}\in\mathrm{L}_1(-\infty,\,+\infty), \mbox{ тогда} 
+$$
+$$
+        F[f](\lambda) \leqslant \frac{C_m}{|\lambda|^m},\quad \mbox{где } C_m = \int\limits_{-\infty}^{+\infty}|f^{(k)}(t)|\,dt.
+$$
+\end{remark}
+\begin{theorem}
+        Пусть задана функция $f$ такая, что $\int_{-\infty}^t f(s)\,ds \in \mathrm{L}_1(-\infty,\,+\infty)$, тогда
+$$
+        F\left[
+\int_{-\infty}^t f(s)\,ds
+        \right] (\lambda)
+=
+        \frac1{i\lambda}F[f](\lambda).
+$$
+\end{theorem}
+\begin{theorem}
+        Пусть задана функция $f$ такая, что $t\cdot f(t) \in \mathrm{L}_1(-\infty,\,+\infty)$, тогда
+$$
+        F[f]'(\lambda) = F[-it\cdot f(t)](\lambda).
+$$
+\end{theorem}
+\begin{proof}
+$$
+        \left(
+\int\limits_{-\infty}^{+\infty}f(t)e^{-i\lambda t}\,dt
+        \right)'_{\lambda}
+=
+        \int\limits_{-\infty}^{+\infty} (-it)f(t)e^{-i\lambda t}\,dt.
+$$
+\end{proof}
+\begin{remark}
+        Как следствие:
+$$
+        \mbox{Пусть } f : t^pf(t)\in \mathrm{L}_1(-\infty,\,+\infty), \; p = \overline{1, k}, \mbox{ тогда}
+$$
+$$
+        F[f]^{(k)}(\lambda) = F[(-it)^k\cdot f(t)].
+$$
+\end{remark}
+\begin{theorem}
+        Пусть $t^p f(t) \in \mathrm{L}_1(-\infty,\,+\infty)\;\forall p$, тогда
+$$
+        F\left[
+-\frac{1}{it}f(t)
+        \right] (\lambda)
+=
+        \int\limits_{-\infty}^{\lambda} F[f](\xi)\,d\xi.
+$$
+\end{theorem}
+
+Теперь поговорим о свойствах преобразования Фурье, связанных с операцие свертки. Напомним, как выглядит эта операция:
+$$
+        (f_1 * f_2)(t) = \int\limits_{-\infty}^{+\infty}f_1(s)f_2(t-s)ds.
+$$
+Эта операция является билинейной, коммутативной и ассоциативной.
