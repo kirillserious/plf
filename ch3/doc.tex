@@ -37,10 +37,11 @@ $$
 \qquad
         \forall \alpha \in \SetR,\,\alpha \neq 0.
 $$
-        \item \textbf{О четности.} Если функция~$f$ является четной, то ее образ~$F[f]$ будет действительной функцией. Если же $f$~--- нечетная, то образ~$F[f]$ будет чисто мнимой функцией.
+        \item \textbf{О четности.} Если функция~$f$ является четной, то ее образ~$F[f]$ будет действительной функцией.
+        \item \textbf{О нечетности.} Если же $f$~--- нечетная, то образ~$F[f]$ будет чисто мнимой функцией.
 \end{enumerate}
 
-Теперь перейдем к более интересным свойствам. Далее каждая теорема, следствие или замечание будут являться свойствами преобразования~Фурье. Большая часть из них будет доказана.
+Теперь перейдем к более интересным свойствам. Далее каждая теорема, следствие или замечание будут являться свойствами преобразования~Фурье. Большая часть из них будет доказана. Для удобства навигации наиболее важные формулы пронумерованы.
 
 \begin{theorem}
         Рассмотрим последовательность функций из класса $\mathrm{L}_1$, стремящююся по норме $\mathrm{L}_1$ к некоторой функции $f$ из того же класса, то есть
@@ -84,7 +85,7 @@ $$
 $$
 \end{remark}
 
-Теперь рассмотрим специальный вид функций, который часто встречается на практике непрерывные и дифференцируемые функции.
+Теперь рассмотрим специальный вид функций, который часто встречается на практике: непрерывные и дифференцируемые функции.
 
 \begin{theorem}
         Пусть функция $f$ непрерывно дифференцируема, абсолютно интегрируема, и ее производная так же абсолютно интегрируема, то есть\footnote{Теорема ходит в интернете в нескольких вариантах условий: совершенно не понятно, $f$ или $f'$ должна быть непрерывной или интегрируемой. Причем доказательства везде примерно одинаковые. Здесь приведен вариант к.ф.-м.н. доцента И.~В.~Рублева.}
@@ -116,9 +117,9 @@ $$
 $$
         \mbox{Пусть } f \in \mathrm{C}^{k-1}(-\infty,\,+\infty),\quad \exists f^{(k)}:f^{(k)}\in\mathrm{L}_1(-\infty,\,+\infty), \mbox{ тогда} 
 $$
-$$
+\begin{equation}
         F[f^{(k)}](\lambda) = (i\lambda)^k\cdot F[f].
-$$
+\end{equation}
 \end{remark}
 
 \begin{theorem}
@@ -128,13 +129,13 @@ $$
 $$
         Тогда
 $$
-        |F[f](\lambda)| \leqslant \frac{C}{|\lambda|}
+        |F[f](\lambda)| \leqslant \frac{C}{|\lambda|}.
 $$
 \end{theorem}
 \begin{proof}
 $$
         \left|\int\limits_{-T}^{+T} f(t) e^{-i\lambda t}\,dt\right|
-        = \left.\frac{f(t)e^{-i\lambda t}}{-i\lambda}\right|_{-T}^{+T} + \frac{1}{\lambda}\int\limits_{-T}^{+T} f(t) e^{-i\lambda t}\,dt
+        = \left.\frac{f(t)e^{-i\lambda t}}{-i\lambda}\right|_{-T}^{+T} + \frac{1}{\lambda}\int\limits_{-T}^{+T} f(t) e^{-i\lambda t}\,dt.
 $$
 \end{proof}
 \begin{remark}
@@ -142,9 +143,9 @@ $$
 $$
         \mbox{Пусть } f \in \mathrm{C}^{k-1}(-\infty,\,+\infty),\quad \exists f^{(k)}:f^{(k)}\in\mathrm{L}_1(-\infty,\,+\infty), \mbox{ тогда} 
 $$
-$$
-        F[f](\lambda) \leqslant \frac{C_m}{|\lambda|^m},\quad \mbox{где } C_m = \int\limits_{-\infty}^{+\infty}|f^{(k)}(t)|\,dt.
-$$
+\begin{equation}
+        F[f](\lambda) \leqslant \frac{C_m}{|\lambda|^m},\quad \mbox{где } C_m = \int\limits_{-\infty}^{+\infty}|f^{(m)}(t)|\,dt.
+\end{equation}
 \end{remark}
 \begin{theorem}
         Пусть задана функция $f$ такая, что $\int_{-\infty}^t f(s)\,ds \in \mathrm{L}_1(-\infty,\,+\infty)$, тогда
@@ -176,23 +177,62 @@ $$
 $$
         \mbox{Пусть } f : t^pf(t)\in \mathrm{L}_1(-\infty,\,+\infty), \; p = \overline{1, k}, \mbox{ тогда}
 $$
-$$
+\begin{equation}
         F[f]^{(k)}(\lambda) = F[(-it)^k\cdot f(t)].
-$$
+\end{equation}
 \end{remark}
 \begin{theorem}
         Пусть $t^p f(t) \in \mathrm{L}_1(-\infty,\,+\infty)\;\forall p$, тогда
-$$
+\begin{equation}
         F\left[
 -\frac{1}{it}f(t)
         \right] (\lambda)
 =
         \int\limits_{-\infty}^{\lambda} F[f](\xi)\,d\xi.
-$$
+\end{equation}
 \end{theorem}
 
-Теперь поговорим о свойствах преобразования Фурье, связанных с операцие свертки. Напомним, как выглядит эта операция:
+Теперь поговорим о свойствах преобразования Фурье, связанных с операцией свертки. Напомним, как выглядит эта операция:
 $$
         (f_1 * f_2)(t) = \int\limits_{-\infty}^{+\infty}f_1(s)f_2(t-s)ds.
 $$
 Эта операция является билинейной, коммутативной и ассоциативной.
+\begin{theorem}
+        Пусть $f_1, f_2 \in \mathrm{L}_1$, тогда
+\begin{equation}
+        F[f_1*f_2](\lambda) = F[f_1](\lambda) \cdot F[f_2](\lambda).
+\end{equation}
+\end{theorem}
+\begin{proof}
+        \begin{multline*}
+\int\limits_{-\infty}^{+\infty}
+\int\limits_{-\infty}^{+\infty}
+f_1(s)f_2(t-s)e^{-\lambda t}\,ds\,dt
+=\\=
+\int\limits_{-\infty}^{+\infty}
+\int\limits_{-\infty}^{+\infty}
+f_1(s)e^{-i\lambda s}
+\left(
+f_2(t-s)e^{-i\lambda(t-s)}
+\right)
+\,ds\,dt
+=\\=
+\int\limits_{-\infty}^{+\infty}
+f_1(s)e^{-i\lambda s}\,ds
+\cdot F[f_2](\lambda)
+=
+F[f_1](\lambda)\cdot F[f_2](\lambda).
+        \end{multline*}
+\end{proof}
+\begin{remark}
+        Аналогично доказывается и такой факт:
+\begin{equation}
+\begin{split}
+        \mbox{Если } F[f_1],F[f_2]\in\mathrm{L}_1(-\infty,\,+\infty), \mbox{ то}
+\\
+        F[f_1 \cdot f_2](\lambda)
+=
+        2\pi \cdot (F[f_1]*F[f_2])(\lambda). 
+\end{split}
+\end{equation}
+\end{remark}
