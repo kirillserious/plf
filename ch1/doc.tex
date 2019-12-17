@@ -1,0 +1,211 @@
+\section{Преобразование Лапласа-Фурье}
+\subsection{Некоторые сведения из ТФКП}
+Перед тем, как приступить непосредственно к преобразованиям Фурье, вспомним, для начала, курс ТФКП. 
+
+Вспомним как задается функция комплексной переменной:
+$$
+f(z)=u(x,y)+iv(x,y),\quad z=x+iy
+$$
+Производная в точке $z_0$:
+$$
+f'(z_0)=\lim_{\Delta\,z\to\,0}\dfrac{\Delta\,f}{\Delta\,z}=\lim_{\Delta\,z\to\,0}\dfrac{f(z_0+\Delta\,z)-f(z_0)}{\Delta\,z},\quad\text{где } \Delta\,z=\Delta\,x+i\Delta\,y
+$$
+\begin{enumerate}
+\item $\Delta\,z = \Delta\,x$: 
+$$
+\lim_{\Delta\,x\to\,0}\dfrac{u(x_0+\Delta\,x,y_0)+iv(x_0+\Delta\,x,y_0)-u(x_0,y_0)-iv(x_0,y_0)}{\Delta\,x}\Rightarrow\:\exists\:u_x,v_x:\:\lim_{\Delta\,x\to\,0}\{\ldots\}=u'_x+iv'_x
+$$
+\item $\Delta\,z = i\Delta\,y$: 
+$$
+\lim_{\Delta\,y\to\,0}\dfrac{u(x_0,y_0+\Delta\,y_0)+iv(x_0,y_0+\Delta\,y_0)-u(x_0,y_0)-iv(x_0,y_0)}{i\Delta\,y}\Rightarrow\:\exists\:u_y,v_y:\:\lim_{\Delta\,y\to\,0}\{\ldots\}=-iu'_y+v'_y
+$$
+\end{enumerate}
+Условия Коши-Римана:
+$$
+\begin{cases}
+u'_x=v'_y\\
+u'_y=-v'_x
+\end{cases}
+$$
+Напомним, что интеграл от функции комплексного переменного вводится (так же, как и в действительной области) как предел последовательности интегральных сумм; функция при этом определена на некоторой кривой $\Gamma$, кривая предполагается гладкой или кусочно-гладкой:
+$$
+\sum\limits_{j=1}^{N}f(\xi_j)\Delta\,z_j\longrightarrow
+\int_{\Gamma}f(z)dz;\quad \Delta\,z_j=z_j-z_{j-1},\: \Gamma: z=z(t),\: dz=z'(t)dt,\: t\in[t_0,t_1]
+$$
+Тогда 
+$$
+\int_{\Gamma}f(z)dz=\int\limits_{t_0}^{t_1}f(z(t))z'(t)dt=\int\limits_{t_0}^{t_1}\left[(u'_x-v'_y)+i(v'_x+u'_y)\right]dt=\int_{\Gamma}udx-vdy + i\int_{\Gamma}vdx+udy 
+$$
+Среди интегралов в комплексном анализе важное место в теории и практике  интегрирования и приложениях занимает интеграл вида $\int_{\Gamma}\dfrac{f(\zeta)}{\zeta-z}d\zeta$, зависящий от $\zeta$. 
+
+В частности, полагая $f(z)$ аналитической в замкнутой области $\gamma$, получаем, что для любой точки аналитичности функция может быть записана в виде интеграла
+$$
+f(z)=\dfrac{1}{2\pi\,i}\oint\limits_{\gamma}\dfrac{f(\zeta)}{\zeta-z}d\zeta.
+$$
+Аналитическая функция имеет производные любого порядка, для которых справедлива формула
+$$
+f^{(k)}(z)=\dfrac{k!}{2\pi\,i}\oint\limits_{\gamma}\dfrac{f(\zeta)}{(\zeta-z)^{k+1}}d\zeta.
+$$
+Теперь дадим определение ряда Лорана необходимого для последующего повествования
+\begin{definition}\label{ch1.lor}
+Ряд 
+\begin{equation}
+\sum_{n=-\infty}^{\infty} c_n(z-z_0)^n
+\end{equation}
+
+называется рядом Лорана функции $f(z)$, если его коэффициенты вычисляются по формуле
+$$
+c_n= \frac{1}{2\pi i} \oint\limits_{\gamma} \frac{f(z)}{(z-z_0)^{n+1}}\,dz,\quad n=0,\pm1,\pm2,\ldots
+$$
+\end{definition}
+\begin{remark}
+$\sum_{n=0}^{\infty}c_n(z-a)^n$ -- правильная часть ряда Лорана и
+$\sum_{n=-\infty}^{-1}{c_{n}}{(z-a)^n}$ -- главная часть ряда Лорана.
+При этом, ряд Лорана считается сходящимся тогда и только тогда, когда сходятся его правильная и главная части.
+\end{remark}
+Важное место в изучении и применении теории функций комплексного переменного занимает исследование их поведения в особых точках, где нарушается аналитичность функции. В частности, это точки, где функция не определена.
+
+Одной из таких особых точек является полюс.
+\begin{definition}
+Говорят, что изолированная точка $z_0\in \overline{C}$ функции $f(z)$ называется полюсом, если $\lim\limits_{z\to z_0}f(z)=\infty$.
+\end{definition}
+\begin{remark}
+Номер старшего члена главной части ряда Лорана функции в ее разложении в окрестности полюса называется порядком полюса.
+Главная часть ряда Лорана в случае полюса порядка и записывается следующим образом:
+\begin{itemize}
+\item[a)] в случае $z_0\in\mathbb{C}$ в виде $\sum_{k=-n}^{-1} c_k(z-z_0)^n$, или $\sum_{k=1}^{n} \frac{c_{-k}}{(z-z_0)^k}$, подробнее:
+$$
+c_n\cdot z^n+ c_{n-1}\cdot z^{n-1}+\ldots+c_1\cdot z,\quad c_n\ne0.
+$$
+\item[б)] в случае $z_0=\infty$ в виде:
+$$
+c_n\cdot z^n+ c_{n-1}\cdot z^{n-1}+\ldots+c_1\cdot z,\quad c_n\ne0.
+$$
+\end{itemize}
+\end{remark}
+\begin{definition}
+Вычетом функции f(z) в изолированной особой точке $z_0~(z_0\in \overline{\mathbb{C}})$ называется интеграл $\dfrac{1}{2\pi i}\oint\limits_{\gamma} f(z)\,dz$, где $\gamma$ — контур, принадлежащий окрестности точки $z_0$ и охватывающий ее. 
+\end{definition}
+\begin{theorem}[Основная теорема о вычетах]
+Если функция f(z) -- аналитическая в $\overline{D}$ за исключением конечного числа особых точек $z_k\in D$, то справедливо равенство (где $C$ — граница области $D$):
+\begin{equation}\label{ch1.rest}
+\oint\limits_{C}f(z)\,dz= 2\pi i \sum_{k=1}^{n} \mathop{\operatorname{res}}\limits_{z_k} f(z),\quad z_k\in D.
+\end{equation}
+\end{theorem}
+\begin{assertion}
+Вычет функции в изолированной особой точке равен коэффициенту $c_{-1}$ при первой отрицательной степени в разложении функции в ряд Лорана в окрестности этой точки, т.е. при $\dfrac{1}{z-z_0}$ для $z_0\in \mathbb{C}$, и этому коэффициенту, взятому с противоположным знаком, для $z_0=\infty\colon$
+$$
+\mathop{\operatorname{res}}\limits_{z_0}f(z)=c_{-1},\quad z_0\in \mathbb{C},$$
+$$
+\mathop{\operatorname{res}}\limits_{\infty} f(z)=-c_{-1},\quad z_0=\infty.
+$$
+\end{assertion}
+\begin{assertion}
+Если $z_0$ полюс порядка п функции $f(z),~ z_0\in \mathbb{C}$, то
+$$
+\mathop{\operatorname{res}}\limits_{z_0}f(z)= \frac{1}{(n-1)!} \lim\limits_{z\to z_0} \frac{d^{n-1}}{dz^{n-1}} \bigl[f(z)\cdot (z-z_0)^n\bigr],\quad z_0-\Pi(n);
+$$
+$$
+\mathop{\operatorname{res}}\limits_{z_0}f(z)= \lim\limits_{z\to z_0} \bigl[f(z)\cdot (z-z_0)\bigr],\quad z_0-\Pi(1).
+$$ 
+\end{assertion}
+\subsection{Применение вычетов для вычисления интеграла вида $\int\limits_{-\infty}^{+\infty}e^{i\lambda\,x}R(x)$}
+Большой интерес представляет возможность применения вычетов для вычисления несобственных интегралов вида $\textstyle{\int\limits_{-\infty}^{+\infty} f(x)dx}$, где интеграл понимается в смысле главного значения, т.е. $\textstyle{\int\limits_{-\infty}^{+\infty} f(x)dx= \lim\limits_{R\to\infty} \int\limits_{-R}^{R}f(x)dx}$ (здесь отрезок $[a,b]=[-R,R]$). 
+
+Будем рассматривать функцию $f(x)$, непрерывную на $(-\infty,+\infty)$. Возможность использования вычетов при решении такой задачи основана на том, что отрезок $[-R,R]$ действительной оси рассматривается как часть замкнутого контура $C$, состоящего из этого отрезка и дуги окружности, а интеграл по контуру записывается в виде суммы:
+$$
+\oint\limits_{C} f(z)\,dz= \int\limits_{-R}^{R}f(x)\,dx+ \int\limits_{C_R}f(z)\,dz, \text{где $C_R$ -- дуга окружности } |z|=R,~ \operatorname{Im}z\geqslant0.
+$$
+Несобственный интеграл$ \textstyle{\int\limits_{-\infty}^{+\infty} f(x)dx}$ определяется как предел:
+$$
+\int\limits_{-\infty}^{+\infty} f(x)\,dx= \oint\limits_{C}f(z)\,dz-\lim\limits_{R\to\infty} \int\limits_{C_R}f(z)\,dz\,.
+$$
+Интерес, с точки зрения применения вычетов, представляют интегралы $\textstyle{\int\limits_{-\infty}^{+\infty} f(x)dx}$, где функция $f(x)$ такова, что $\textstyle{\lim\limits_{R\to\infty} \int\limits_{C_R} f(z)dz=0}$. Классы таких функций выделяются, и для всех функций рассматриваемого класса устанавливается формуа $\textstyle{\int\limits_{-\infty}^{+\infty} f(x)\,dx= \oint\limits_{C} f(z)dz}$.
+
+Мы же, далее, рассмотрим $\textstyle{\int\limits_{-\infty}^{+\infty} f(x)\,dx}$, где $f(x)=R(x)e^{i\lambda x}$ и $R(x)= \dfrac{P_n(x)}{Q_m(x)},~m-n \geqslant 1$ и $Q_m(x)\ne0,~ x\in R$, а $R(x)$ принимает действительные значения. Такой интеграл сходится, так как он может быть записан в виде суммы двух сходящихся интегралов:
+$$
+\int\limits_{-\infty}^{+\infty} R(x)e^{i\lambda x}\,dx= \int\limits_{-\infty}^{+\infty} R(x)\cos\lambda x\,dx+ i\int\limits_{-\infty}^{+\infty} R(x)\sin\lambda x\,dx\,.
+$$
+Доказательство возможности применения вычетов к вычислению интеграла $\textstyle{\int\limits_{-\infty}^{+\infty} R(x)e^{i\lambda x}\,dx}$ основано на следующем утверждении.
+\begin{assertion}[Лемма Жордана]
+Пусть функция f(z) непрерывна в области $D:\, |z| \geqslant R_0,~ \operatorname{Im}z \geqslant-a$ и $\lim\limits_{R\to\infty} \max_{C_R}|f(z)|=0$, где $C_R$ -- дуга окружности $|z|=R,~ \operatorname{Im}z\geqslant-a$. Тогда для любого $\lambda\:>\:0$ справедливо равенство
+$$
+\lim\limits_{R\to\infty} \int\limits_{C_R} e^{i\lambda z}f(z)\,dz=0.
+$$
+\end{assertion}
+
+Для рассматриваемых в данном пункте интегралов $\textstyle{\int\limits_{-\infty}^{+\infty} R(x)e^{i\lambda x}\,dx}$ функция $f(z)=R(z)$ удовлетворяет лемме Жордана. Подводя итог приведенным рассуждениям, запишем следующее утверждение.
+\begin{assertion}
+Пусть $R(x)$ -- рациональная функция, не имеющая особых точек на действительной оси (т.е. $Q(x)\ne0$ для $x\in\mathbb{R}$), для которой точка $z=\infty$ -- нуль порядка не ниже первого (т.е. $m-n\geqslant1$). Тогда справедливы формулы:
+\begin{enumerate}
+\item при $\lambda\: >\: 0$
+$$
+\int\limits_{-\infty}^{+\infty} R(x)e^{i\lambda x}\,dx= 2i\pi \sum_{k=1}^{n} \mathop{\operatorname{res}}\limits_{z=z_k} \bigl[R(z)e^{i\lambda z}\bigr],\quad \operatorname{Im} z_k\: >\: 0;
+$$
+\item при $\lambda\: <\: 0$
+$$
+\int\limits_{-\infty}^{+\infty} R(x)e^{i\lambda x}\,dx=-2i\pi\sum_{k=1}^{n} \mathop{\operatorname{res}}\limits_{z=z_k} \bigl[R(z)e^{i\lambda z}\bigr],\quad \operatorname{Im} z_k\: <\: 0;
+$$
+\end{enumerate}
+\end{assertion}
+\subsection{Ряды и преобразование Фурье}
+Пусть $f(t)$ -- периодическая с периодом $T=2\pi,\: t\in[-\pi,\pi]$.
+$$
+f(t)=a_0+2\sum\limits_{k=1}^{\infty}\left[a_k \cos kt + b_k \sin kt\right],
+$$
+где 
+$$
+\begin{array}{ll}
+a_k=\dfrac{1}{2\pi}\int\limits_{-\pi}^{\pi}f(t)\cos(kt)\;dt, k=0,1,\dots, \\
+b_k=\dfrac{1}{2\pi}\int\limits_{-\pi}^{\pi}f(t)\sin(kt)\;dt, k=1,2,\dots.
+\end{array}
+$$
+Запишем ряд в наних обозначениях
+$$
+f(t)=\sum\limits_{k=-\infty}^{\infty}c_ke^{ikt},\quad c_k=\dfrac{1}{2\pi}\int\limits_{-\pi}^{\pi}f(t)e^{-ikt}dt,\: c_0=a_0,\: c_k=a_k+ib_k,
+$$
+$$
+c_k e^{ikt} + c_{-k} e^{-ikt}=[a_k-ib_k][\cos\,kt + i\sin\,kt] + [a_k+ib_k][\cos\,kt-i\sin\,kt]=2a_k\cos\,kt+2b_k\sin\,kt.
+$$
+Далее, сделаем небольшую замену
+$$
+f(t)\longrightarrow f(s),\ s\in[-T/2,T/2],\ t=\dfrac{2\pi s}{T}\Rightarrow f\left(\dfrac{Tt}{2\pi}\right)=\sum\limits_{k=-\infty}^{+\infty}c_k e^{ikt}.
+$$
+Тогда 
+$$
+f(s)=\sum\limits_{k=-\infty}^{+\infty}c_k e^{\frac{2\pi is}{T}},\quad c_k=\dfrac{1}{T}\int\limits_{-T/2}^{T/2}f(s)e^{\frac{-2\pi isk}{T}}ds.
+$$
+Пусть теперь
+$$
+f_T(t)=f(t),\ \text{но продолженное по периоду}\ t\in\left[-T/2,T/2\right],\ f(t)\in (\infty,+\infty).
+$$
+$$
+f_T(t)=\sum\limits_{i=-\infty}^{+\infty}c_{k,T} e^{\frac{2\pi it}{T}},\quad c_{k,T}=\dfrac{1}{T}\int\limits_{-T/2}^{T/2}f(t)e^{\frac{-2\pi itk}{T}}ds.
+$$
+Пусть $\exists\lambda\in\mathbb{R},\ \Delta\lambda > 0$  и $k:\lambda\leqslant \dfrac{2\pi k}{T}<\lambda+\Delta\lambda\:\Rightarrow\:\dfrac{T\lambda}{2\pi}\leq k < \dfrac{T\lambda}{2\pi}+\dfrac{T\Delta\lambda}{2\pi}$,  значит 
+$$
+k\approx \dfrac{T\Delta\lambda}{2\pi},\quad c_{k,T}\approx c_{\lambda,T}=\dfrac{1}{T}\underbrace{\int\limits_{-T/2}^{T/2}f(t)e^{-i\lambda t}}_{=F_T(\lambda)}
+$$
+В итоге получим
+\begin{multline*}
+f_T(t)=\sum\limits_{i=-\infty}^{+\infty}\dfrac{F_T(\lambda)}{T}e^{\frac{2\pi ikt}{T}}
+\approx\sum\limits_{i=-\infty}^{+\infty}\dfrac{F_T(\lambda)}{T}e^{-\lambda t}\dfrac{T}{2\pi}\Delta\lambda
+\xrightarrow{\Delta\lambda\to 0}\\
+\xrightarrow{\Delta\lambda\to 0}
+\boxed{\dfrac{1}{2\pi}\int\limits_{-\infty}^{+\infty}F(\lambda)e^{i\lambda t}d\lambda=f(t)}\textbf{ -- обратное преобразование Фурье}
+\end{multline*}
+$$
+\boxed{
+F_T(\lambda)\xrightarrow{T\to\infty}F(\lambda)=\int\limits_{-\infty}^{+\infty}f(t)e^{-i\lambda\,t}dt}\textbf{ -- прямое преобразование Фурье}
+$$
+Другие формы преобразования Фурье, встречающиеся в литературе
+$$
+F(\lambda)=\dfrac{1}{g}\int\limits_{-\infty}^{+\infty}f(t)e^{-i\omega\lambda\,t}dt,\quad 
+f(t)=\dfrac{1}{h}\int\limits_{-\infty}^{+\infty}F(\lambda)e^{i\omega\lambda\,t}d\lambda,\quad
+gh=\dfrac{2\pi}{|\omega|}
+$$
+\begin{enumerate}
+\item $\omega=\pm 1;\quad g=1,\ h=2\pi.$
+\item $\omega=\pm 2\pi;\quad g=h=1.$ 
+\item $\omega=\pm 1;\quad g=h=\sqrt{2\pi}.$ 
+\end{enumerate}
