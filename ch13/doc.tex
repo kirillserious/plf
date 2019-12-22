@@ -1,0 +1,281 @@
+\section{Теоремы о предельных значениях}
+
+\begin{theorem}
+
+Пусть $f$ -- непрерывно дифференцируема; $f(t) \supset F(p).$ Если существует предел $f(+\infty),$ тогда
+$$
+f(+\infty) = \lim\limits_{p \rightarrow 0} p F(p).
+$$
+\end{theorem}
+\begin{proof}
+$$ f'(t) \supset pF(p) - f(+0) $$
+$$ \int\limits_0^{+\infty} f'(t) e^{-pt} dt = p F(p) - f(+0) $$
+что при $p$ стремящемся к нулю стремится к $f(+\infty) - f(+0).$ \end{proof}
+
+Контрпримеры: 
+$$ \text{cos} \, t \supset \frac{p}{p^2 +1} \Rightarrow pF(p) = \frac{p^2}{p^2 +1}  \stackrel{p \rightarrow 0}{\longrightarrow} 0   $$
+$$ \text{sin} \, t \supset \frac{1}{p^2 +1} \Rightarrow pF(p) = \frac{p}{p^2 +1}  \stackrel{p \rightarrow 0}{\longrightarrow} 0$$
+Однако, мы знаем, что у синуса и косинуса пределов на бесконечности не существует.
+
+\begin{theorem}
+Пусть $f$ -- непрерывно дифференцируема; $f(t) \supset F(p).$ Если существует предел $f(+0),$ то 
+$$
+f(+0) = \lim\limits_{p \rightarrow \infty} p F(p).
+$$
+\end{theorem}
+\begin{proof}
+$$ \int\limits_0^{+\infty} f'(t) e^{-pt} dt = p F(p) - f(+0), $$
+здесь левая часть равенства при $p$ стремящемся к бесконечности сходится к нулю. \end{proof}
+
+Обратимся к предыдущему примеру:
+$$ \frac{p^2}{p^2 +1}  \stackrel{p \rightarrow \infty }{\longrightarrow} 1 = \cos(0), $$
+$$ \frac{p}{p^2 +1}  \stackrel{p \rightarrow \infty }{\longrightarrow} 0 = \sin(0).$$
+
+\section{Приложения преобразования Лапласа к исследованию процессов в электрических цепях}
+
+Рассмотрим электрическую цепь, включающую в себя индуктивную катушку, сопротивление и конденсатор, рис. \ref{ch14posl}. Обозначим $I$ -- ток, $E$ -- и $i \supset I, e \supset E.$ Переходя к комплексному току $i(t)$, и полагая $i(0) = 0,$ можно описать систему следующим образом:
+$$ U_L = L \frac{di}{dt}, U_R = Ri(t), U_C = \frac{1}{C} \int\limits_{0}^{t} i(t)dt$$
+$$  L  \frac{di}{dt} + Ri(t) + \frac{1}{C} \int\limits_{0}^{t} i(t)dt = e(t)$$
+$$p L I + R I + \frac{I}{Cp} = E$$
+$$(p L + R + \frac{1}{C p})I = Z I = E $$
+Здесь $Z$ -- \textit{импеданс} (операторное сопротивление), а $Y =\frac{1}{Z}$ -- \textit{адмитанс}.
+
+\begin{figure}[h]
+	\center{\includegraphics[width = 0.4\textwidth]{ch13/IMG_0552.eps}}
+	\caption{Электрическая цепь, включающая в себя индуктивную катушку, конденсатор и резистор}\label{ch14posl}
+
+\end{figure}
+
+Теперь рассмотрим цепь с параллельным соединением, рис. \ref{ch14par1}. Для цепей с параллельным соединением при импедансах $Z_1, Z_2, \ldots, Z_k$ верно: $$Y_1 = \frac{1}{Z_1}, Y_2 = \frac{1}{Z_2}, \ldots, \frac{1}{Z_k}, \quad Y = Y_1 + Y_2 + \ldots Y_k .$$
+
+$$Z = Z_1 + Z_2$$
+$$\frac{1}{R} + \frac{1}{\frac{1}{Cp}} = \frac{1}{Z_2} = Cp + \frac{1}{R} = \frac{CRp + 1}{R}$$
+$$ Z_2 = \frac{R}{CRp + 1}, Z = pL +   \frac{R}{CRp + 1}$$
+
+\begin{figure}[h]
+	\centering
+	
+	\begin{subfigure}[t]{0.4\textwidth}
+	\center{\includegraphics[width=\textwidth]{ch13/IMG_0561.eps}}\caption{Рассматриваем как цепь с параллельным соединением}\label{ch14par1}
+	\end{subfigure}
+	~ ~ ~ ~               
+	\begin{subfigure}[t]{0.4\textwidth}
+	\center{\includegraphics[width=\textwidth]{ch13/IMG_0553.eps}}\caption{Рассматриваем как двухконтурную цепь}\label{ch14par2}
+	\end{subfigure}
+	
+	\caption{Цепь с параллельным соединением}\label{ch14par}
+\end{figure}
+ 
+Можно эту же цепь рассмотреть как двухконтурную, рис. \ref{ch14par2}, и, опираясь на законы Кирхгофа, получить 
+$$
+\begin{cases}
+pLI_1 + R(I_1 - I_2) = E \\
+R(I_2 - I_1) + \frac{1}{Cp} I_2 = 0
+\end{cases}
+$$
+$$ I_2 (R + \frac{1}{Cp}) - RI_1 = 0$$
+$$ I_2 = \frac{R}{R + \frac{1}{Cp}} I_1$$
+$$ I_1 - I_2 = (1 - \frac{R}{R + \frac{1}{Cp}})I_1 = \frac{1}{CRp + 1} I_1$$
+$$I_1 (pL + \frac{R}{CRp + 1}) = E = I_1 Z $$
+
+В задачах часто рассматривают случаи 
+\begin{itemize}
+\item Постоянного тока
+$$ e = e_0, E = \frac{e_0}{p}$$
+\item Переменного тока
+$$e = e_0 \sin(wt), E = \frac{e_0 w}{p^2 + w^2} $$
+\end{itemize}
+
+
+\begin{figure}[h]
+	\center{\includegraphics[width = 0.4\textwidth]{ch13/IMG_0554.eps}}
+	\caption{Конкретный пример}
+	\label{ch14KP}
+
+\end{figure}
+
+Решим конкретную задачу, рис. \ref{ch14KP}:
+$$ (Lp + R + \frac{1}{Cp})I = \frac{e_0}{p} $$
+$$ I = \frac{e_0}{p}\Big (\frac{1}{Lp + R + 1/Cp} \Big ) =\frac{e_0 C}{CLp^2 + RCp + 1} = \frac{e_0}{L(p + \frac{R}{2L})^2 - \frac{R^2}{4L} + \frac{1}{C}} =$$
+$$ =\Big \{  \text{пусть } D = C^2 r^2 - 4 CL <0 \text{, тогда корни будут комплексными}    \Big \} = $$
+$$ = \frac{e_0 /L}{(p + \frac{R}{2 L}^2) + (\frac{1}{CL} - \frac{R^2}{4L^2})} \subset e^{-\frac{R}{2L}t} \frac{e_0}{L} \frac{\sin \Big( \sqrt{\big (\frac{1}{CL} - \frac{R^2}{4L^2} \big )}  t \Big) }{\sqrt{\frac{1}{CL} - \frac{R^2}{4L^2}}} $$
+
+\begin{figure}[h]
+	\centering
+	
+	\begin{subfigure}[t]{0.4\textwidth}
+	\center{\includegraphics[width=\textwidth]{ch13/IMG_0555.eps}}\caption{ Цепь с нагрузкой}\label{ch14ex2}
+	\end{subfigure}
+	~ ~ ~ ~               
+	\begin{subfigure}[t]{0.4\textwidth}
+	\center{\includegraphics[width=\textwidth]{ch13/IMG_0556.eps}}\caption{Можно рассматривать и так}
+	\end{subfigure}
+	
+	\caption{Пример 2}\label{ch14ex}
+\end{figure}
+
+
+Рассмотрим цепь с нагрузкой, рис. \ref{ch14ex2}
+$$RI + pL(I - I') + RI +\frac{1}{Cp}I = E $$
+$$pL (I'- I) = - E'$$
+$$ RI + \frac{1}{Cp}I  = E -E' $$
+$$\begin{cases}
+E' = E - RI + \frac{1}{Cp}I  \\
+I' = I - \frac{E - (R + \frac{1}{Cp} )I}{pL}
+\end{cases}$$
+$$ \begin{cases}
+E' = A(p)E + B(p)I  \\
+I' = C(p) E + D(p) I
+\end{cases} \quad \Rightarrow 
+ \begin{cases}
+E = \tilde A(p)E' +\tilde B(p)I'  \\
+I'= \tilde C(p) E' + \tilde D(p) I'
+\end{cases}
+$$
+Положим
+$$
+\begin{bmatrix}
+\tilde A(p)  & \tilde B(p) \\
+\tilde C(p) & \tilde D(p)
+\end{bmatrix} = \tilde U.
+$$
+$$
+\begin{bmatrix} E \\ I \end{bmatrix} = \begin{bmatrix} E_0 \\ I_0 \end{bmatrix} =  \tilde U_1 \begin{bmatrix} E_1 \\ I_1 \end{bmatrix} = \big \{ E_2 = 0 \big \} = \tilde  U_2 \begin{bmatrix} 0 \\ I_2 \end{bmatrix} 
+$$
+
+\section{Электромеханические аналогии}
+Рассмотрим Гамильтонову систему, с переменными $q = (q_1, q_2, \ldots , q_n)^T,$ на которую действуют внешние силы $Q.$ Внешние силы могут быть следующих типов:
+\begin{enumerate}
+\item \textit{Диссипативные}
+$$ Q =n- B\dot q, \quad B = B^T >0$$
+$$\left< \dot q, Q\right> = - \left< \dot q, B \dot q\right> <0 $$
+К ним относится сила трения. Можно также ввести \textit{функцию Релея} $R = \frac{1}{2} \left< \dot q, B \dot q\right>$ и тогда  $Q = - \frac{\partial R}{\partial \dot q}. $
+
+\item \textit{Гироскопические}
+$$ Q = \text{Г} \dot q, \quad  \text{Г}^T= -\text{Г} $$
+$$ \left< \dot q, Q \right> = \left<\dot q, \text{Г} \dot q  \right> = \left< \text{Г}^T \dot q, \dot q \right> = \left< \dot q, \text{Г} \dot q \right>= - \left< \dot q, \text{Г}  \right> = 0$$
+\end{enumerate}
+
+Далее обозначим К -- кинетическую энергию системы, П -- потенциальную энергию, $ \text{Е = К + П} $ -- полную энергию системы,
+$$ \dot q = \text{К} - \text{П}, \quad  \text{К}  = \frac{1}{2}\left< \dot q, M \dot q \right>,  \text{П} = \text{П}(q),$$
+$$ \frac{d\text{Е}}{dt} = \sum\limits_j \left< \dot q_j , Q_j\right>$$
+Положим $M = M^T$ и $ \frac{\partial \text{К}}{\dot q } = M \dot q.$
+Запишем уравнение Лагранжа:
+$$ \frac{d}{dt} \Big (\frac{\partial L}{\partial \dot q} \Big) -  \frac{\partial L}{\partial q} = \sum\limits_j Q_j$$
+$$ \frac{d}{dt}  \Big ( \frac{\partial  \text{К} }{\partial \dot q}  \Big )  -  \frac{\partial  \text{К} }{\partial q}  = - \frac{\partial  \text{П} }{\partial q} + \sum\limits_j  Q_j$$
+Воспользуемся соотношением $ \frac{d}{dt}  \Big ( \frac{\partial  \text{К} }{\partial \dot q}  \Big ) = M \ddot q$, и пусть П  имеет вид $\text{П} = \text{П}(q) = Cq.$ Следовательно, получим $  M \ddot q + B \dot q + C q = Q_{\text{внешние}}$ или в одномерном случае
+\begin{equation} \label{ch14esys1}
+ m \ddot q + b \dot q + c q = Q_{\text{внешние}}.
+ \end{equation}
+Проведем аналогию с уравнением
+$$ L \frac{di}{dt} + R i + \frac{1}{C} \int\limits_0^t i(\tau) d\tau = e.$$
+Если мы вспомним, что $i = \frac{dq}{dt}, $ то получим представление аналогичное \eqref{ch14esys1}:
+$$ L \frac{d^2 q}{dt^2} + R + \frac{d q}{dt}+ \frac{1}{C} = e.$$ 
+Кратко выводы можно описать таблицей \ref{ch14t1}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline $q$& $b$ & $m$ & $c$ & $Q$ & $\text{К} = 1/2 m\dot q^2$  & $R =1/2 b\dot q^2$ & $\text{П} = 1/2 c q^2$ \\
+\hline $q$ & $L$  & $R$ & $1/С$ & $l$ & $L/2  \dot q^2$ & $R/2  \dot q^2$ & $1/2C t q^2$    \\
+\hline $U$ & $C $ & $1/R$ & $1/L$ & $di/dt$ & -- & -- & --  \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Электромеханические аналогии }\label{ch14t1}
+\end{table}
+
+Для цепи, иллюстрирующей сложение токов, изображенной на рисунке \ref{ch14plus}, можно выписать следующие соотношения 
+$$U =  L \frac{di}{dt}, \,U = Ri, \, i = \frac{U}{R}, \, C \frac{dU}{dt} = i,  \, i = \frac{1}{L}\int\limits_0^{t_0} U(\tau) d\tau.$$
+
+\begin{figure}[h]
+	\center{\includegraphics[width = 0.4\textwidth]{ch13/IMG_0557.eps}}
+	\caption{Сложение токов}
+	\label{ch14plus}
+
+\end{figure}
+
+\section{Управляемые и наблюдаемые системы}
+Рассматривается система
+\begin{equation}\label{ch14cont1}
+\begin{cases}
+\dot x = Ax + Bu + D_1v \\
+y = Cx + D_2v.
+\end{cases}
+\end{equation}
+Здесь $x$ -- \textit{фазовая переменная}, которую мы наблюдаем, $u$ -- \textit{управление}, $v$ -- \textit{помеха}, причиной появления которой зачастую являются неточность линеризации или внешние условия. Второе уравнение в данной системе называется \textit{уравнением наблюдения}, и соответственно $y$ -- \textit{наблюдением}. Применим преобразование Лапласа, обозначив $x(0) =x^0$, $x \supset X, y \supset Y, v \supset V, u \supset U$.
+$$ pX - x^0 = AX + BU +  D_1V$$
+$$ (pI - A)X = x^0 + BU + D_1V$$
+$$ X = (pI - A)^{-1} x^0 +(pI - A)^{-1}BU + (pI - A)^{-1}D_1V $$
+$$ Y = CX + D_2V = C(pI - A)^{-1}x^0 + C(pI - A)^{-1}BU + (C(pI - A)^{-1}D_1 + D_2)V =$$
+$$ = C(pI - A)^{-1}x^0 + H_{yu}U + H_{yv}V$$
+$H_{yu}   = C(pI - A)^{-1}B$ принято называть \textit{передаточной функцией (transfer function)}.
+
+Пусть наблюдение одномерно $y \in \ensuremath{\mathbb{R}}, C \in \ensuremath{\mathbb{R}}^{1 \times n},$ и удовлетворяет системе
+\begin{equation}\label{ch14cont2}
+\frac{d^ny}{dt^n} + c_{n-1}\frac{d^{n-1}y}{dt^{n-1}} + c_{n-2}\frac{d^{n-2}y}{dt^{n-2}} + \ldots c_1 \frac{dy}{dt} + c_0 y = u.
+\end{equation}
+Сведем ее к системе \eqref{ch14cont1}:
+\begin{equation}
+\begin{cases}
+x_1 = y \\
+x_2 = \frac{dy}{dt} \\
+\ldots \\
+x_n = \frac{d^{n-1}y}{dt^{n-1}} 
+\end{cases} = 
+\begin{cases}
+\dot x_1 = x_2, \quad (y = x_1) \\
+\dot x_2 = x_3 \\
+\ldots \\
+\dot x_n = -c_{n-1} x_{n}- c_{n-2} x_{n-1}- \ldots -c_0 x_1 + u.
+\end{cases}
+\end{equation}
+Возвращаясь к многомерной системе, для $y$ справедливо:
+\begin{equation}\label{ch14cont3}
+\begin{cases}
+y = \underline{C^T x}, \quad (C = C^T) \\
+\frac{dy}{dt} = \underline{C^T A x} + C^T Bu \\
+\frac{d^2y}{dt^2} = \underline{C^T A ^2x} + C^T A B u + C^T B \frac{du}{dt} \\
+\ldots \\
+\frac{d^ny}{dt^n} = \underline{C^T A ^n x} + C^T A^{n-1} B u +\ldots C^T B \frac{d^{n-1}u}{dt^{n-1}}.
+\end{cases}
+\end{equation}
+По теореме Гамильтона-Кэли $A$ имеет разложение $A^n = c_0 I + c_1 A + \ldots c_{n-1} A^{n-1}.$  С тем, чтобы избавиться от подчеркнутых слагаемых домножим первое из уравнений системы \eqref{ch14cont3} на $-c_0$, второе на $-c_1$, третье на $-c_2$, далее на аналогичные коэффициенты вплоть до предпоследнего уравнения, а затем сложим их все. Тогда мы сможем продолжить равенство из уравнения \eqref{ch14cont2}:
+$$ u = \beta_0 u + \beta_1 \frac{du}{dt} + \ldots \beta_{n-1}\frac{d^{n-1}u}{dt^{n-1}}.$$
+
+Положив $x^0 = 0$ и исключив помеху, получим $Y = H_{yu}U$. Различные схемы управления можно увидеть на рисунках \ref{ch14u1}, \ref{ch14u2}. 
+
+\begin{figure}[h]
+	\centering
+	
+	\begin{subfigure}[t]{0.4\textwidth}
+	\center{\includegraphics[width=\textwidth]{ch13/IMG_0563.eps}}\caption{Различное соединение блоков}\label{ch14u1}
+	\end{subfigure}
+	~ ~ ~ ~               
+	\begin{subfigure}[t]{0.4\textwidth}
+	\center{\includegraphics[width=\textwidth]{ch13/IMG_0560.eps}}\caption{Замкнутая и разомкнутая система}\label{ch14u2}
+	\end{subfigure}
+	
+	\caption{Различные управляемые системы}\label{ch14u}
+\end{figure}
+
+Для передаточной функции $ H = H_{yu}   = C(pI - A)^{-1}$ вводят понятие \textit{частотной характеристики,} определяемой как $H(iw), w \in \ensuremath{\mathbb{R}}.$ $|H(iw)|$ называют \textit{коэффициентом усиления}.
+
+Рассмотрим управление вида 
+$$ u(t) = a e^{iwt}, \quad a \in \ensuremath{\mathbb{R}}^{n\times 1}, w \in \ensuremath{\mathbb{R}},$$
+и будем считать $A$ устойчивой матрицей (это верно, например, если все собственные ее значения имеют отрицательную вещественную часть). Справедлива теорема
+\begin{theorem}
+Пусть $A$ устойчивая матрица, $\bar y(t) = H(iw)a e^{iwt}$. Тогда 
+$$\left\lVert y(t) - \bar y(t) \right\rVert \stackrel{t \rightarrow \infty }{\longrightarrow} 0,$$
+где $y(t)$ -- выход при $ u(t) = a e^{iwt}$ (устойчивый режим).
+
+\end{theorem}
+\begin{proof}
+
+$$ y(t) = C e^{At}x^0 + C\int\limits_0^t e^{A(t-\tau)}B a e^{iwt} d\tau \Rightarrow$$
+$$ \Rightarrow \big \{ t \rightarrow \infty , C e^{At}x^0  \stackrel{t \rightarrow \infty }{\longrightarrow} 0\}  \Rightarrow$$
+$$ \Rightarrow C e^{At}  \int\limits_0^t e^{-A\tau}B e^{iwt} a d\tau = C e^{At}  \int\limits_0^t e^{(iwI -A)\tau} d\tau B  a =$$
+$$=  C \big [ e^{iwI} - e^{-At}  \big ] \big [ iwI - A \big ] ^{-1} Ba  \stackrel{t \rightarrow \infty }{\longrightarrow} C \big [ iwI - A \big ]^{-1} Ba e^{iwt}= H(iw) a e^{iwt}$$
+Здесь мы воспользовались следующим преобразованием:
+$$ \int\limits_0^t e^{(iwI -A)\tau} d\tau =\Bigg \{\frac{e^{(iwI - A)\tau}}{(iwI - A)} \Bigg |_{\tau =0 }^{\tau = t} \Bigg \}=\big  [ e^{(iwI - A)t} - I \big] (iwI - A)^{-1},  $$
+справедливость этой формулы доказывается прямым дифференцированием. \end{proof}
