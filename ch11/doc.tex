@@ -1,0 +1,569 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[russianb]{babel}
+\usepackage{vmargin}
+\setpapersize{A4}
+\setmarginsrb{2.5cm}{2cm}{1.5cm}{2cm}{0pt}{0mm}{0pt}{13mm}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\sloppy
+\begin{document}
+
+\title{ПЛФ}
+\author{arin7al}
+\date{December 2019}
+
+\begin{large}
+\begin{LARGE}
+\textit{\underline{Умножение и свертка.}}
+\end{LARGE}
+
+\vspace{0.5cm}
+1) Свертка \hspace{7cm}
+$
+\begin{matrix}
+ f(t) \supset F(p)  \\
+ g(t) \supset G(p) \\
+ (f \ast g)(t) \supset F(p)G(p)
+\end{matrix}
+$
+
+\vspace{0.5cm}
+{\LARGE $ \int_0^t f(s)g(t - s) ds$ }
+\hspace{4cm}
+$
+\begin{pmatrix}
+\text{ т.к. при \hspace{0.2cm}} s < 0, f=0\\
+\text{при \hspace{0.2cm}} s > t, g = 0
+\end{pmatrix}
+$
+
+2) Умножения
+
+\vspace{0.5cm}
+\begin{Large}
+
+$  f(t)g(t) \supset (F \ast G)(p) =  
+\begin{cases}
+ \frac{1}{2\pi i}\int_{\chi-i\infty}^{\chi + i\infty} F(z) G(p-z)dz ,\text{\hspace{0.2cm}} \overline{\mu_1}\leq \chi_1 \leq Re p - \overline{\mu_2}\\
+ \frac{1}{2\pi i}\int_{\chi - i\infty}^{\chi + i\infty} F(p-z)G(z) dz ,\text{ \hspace{0.2cm}} \overline{\mu_2}\leq \chi_1 \leq Re p - \overline{\mu_1}
+\end{cases}
+$
+\end{Large}
+
+\vspace{0.5cm}
+$ Re p \geq \overline{\mu_1} + \overline{\mu_2}$
+
+\vspace{0.5cm}
+\begin{LARGE}
+\textit{\underline{Периодические функции.}}
+\end{LARGE}
+
+\vspace{0.5cm}
+\begin{Large}
+$ f(t + T)  = f(t), \text{\hspace{0.2cm}} T > 0, \text{\hspace{0.2cm}} t\geq 0$
+\end{Large}
+
+\vspace{0.5cm}
+$1^{\circ}) f = sin(t) $ 
+
+\vspace{0.5cm}
+{\Large $F(p) = \int_0^\infty f(t)e^{-pt}dt = \Sigma_{k=1}^\infty \int_{(k-1)T}^{kT} f(t)e^{-pt} dt = \lbrace t = s + (k-1)T\rbrace = \\ \text{\hspace{0.2cm}} = \Sigma_{k=1}^\infty e^{-(k+1)Tp} \int_0^\pi f(s) e^{-ps} ds$}
+\begin{LARGE}
+$ = \frac{\int_0^T f(t)e^{-pt}dt}{1 - e^{-pt}}$
+\end{LARGE}
+
+\vspace{0.5cm}
+\begin{large}
+$1^{\circ})$ Пр.) $ = \int_0^{2\pi} sin(t) e^{-pt} dt = - \int_0^{2\pi} e^{pt} d cos(t) = -\underbrace{e^{-pt}cos(t)\mid_{t=0}^{2\pi} }_{1-e^2\pi p} - p\int_0^{2\pi}e^{-pt} d sin(t)  
+=\\ =\text{\hspace{0.2cm}} 1-e^2\pi p - p^2 I(p)$
+\end{large}
+
+\vspace{0.5cm}
+\begin{Large}
+$
+\text{\hspace{0.2cm}} I(p) = \frac{1-e^2\pi p}{1+p^2},
+$
+\hspace{0.8cm}
+$
+\chi(t)sin(t)\supset \frac{1}{1+p^2}
+$
+
+\end{Large}
+
+\vspace{0.5cm}
+\begin{Large}
+$2^{\circ}) \text{\hspace{0.2cm}} \int_0^{\frac{T}{2}}e^{-pt}tdt + \int_{\frac{T}{2}}^T e^{-pt}(T -t)dt = 
+-\frac{1}{p}\int_0^{\frac{T}{2}} t de^{-pt} -\frac{1}{p} \int_{\frac{T}{2}}^T (T - t) de^{-pt} = \\ =
+-\frac{1}{p}\frac{\Gamma}{2}e^{-p\frac{T}{2}} + \frac{1}{p}\frac{\Gamma}{2}e^{-p\frac{T}{2}} + \frac{1}{p}\int_0^{\frac{T}{2}} e^{-pt} dt - \frac{1}{p}\int_{\frac{T}{2}}^T e^{-pt}dt =
+\frac{1}{p^2}\left[1-e^{-p\frac{T}{2}}\right] - \\ - \frac{1}{p^2}\left[e^{p\frac{T}{2}} - e^{-pT}\right]
+$
+\end{Large}
+
+\newpage
+\begin{LARGE}
+\textit{\underline{Отыскание оригинала по изображению.}}
+\end{LARGE}
+
+\vspace{0.5cm}
+$
+F(p) = \frac{Q(p)}{R(p)} \text{\hspace{0.5cm}}
+\begin{matrix}
+Q , R  - \text{\hspace{0.8cm}многочлены} \\
+deg Q < deg R
+\end{matrix}
+$
+
+\vspace{0.5cm}
+$
+R(p) = (p - \lambda_1)^{k_1}\ldots(p-\lambda_m)^{k_m}(p^2 + \lambda_1 p + \beta_1)^(L_1)\ldots(p^2 + \lambda_n p + \beta_n)^{L_n} 
+$
+
+\vspace{0.5cm}
+\begin{LARGE}
+$
+\frac{Q(p)}{R(p)} = \overbrace{\frac{A_{11}}{p-\lambda_1}}^{\subset A_{11}e^{\lambda_1 t}}
++
+\overbrace{\frac{A_{12}}{(p-\lambda_1)^2)}}^{\subset A_{12}te^{\lambda_1 t}}
++
+\ldots
++
+\overbrace{\frac{A_{1,k1}}{(p-\lambda_1)^{k1}}}^{\subset A_{11}t^{k-1-1}e^{\lambda_1 t}}
++
+\overbrace{\frac{B_{11}p + C_{11}}{p^2 + \lambda_1 p + \beta_1}}^{\subset\ldots ?}
++ \\ +
+\frac{B_{12}p + C_{12}}{(p^2 + \lambda_1 p + \beta_1)^2}
++ 
+\ldots
++
+\frac{B_{1,l}p + C_{1,l}}{(p^2 + \lambda_1 p + \beta_1)^{l1}}
++
+\ldots
+$
+\end{LARGE}
+ 
+\vspace{0.5cm}
+\begin{Large}
+\textit{Как просто найти?}
+\end{Large}
+
+\vspace{0.5cm}
+\begin{Large}
+$
+1)\text{\hspace{0.2cm}} A_{i1} \ldots A{ik_i} :
+$
+\end{Large}
+\begin{flushright}
+\begin{Large}
+$
+A_{i,k_i} :\text{\hspace{0.2cm}} F(p)(p-\lambda_i)^{k_i} 
+=
+A_{i1}(p-\lambda_i)^{k_i-1}
++
+\ldots
++
+A_{i,k_1}(p-\lambda_i)^{1}
++
+\ldots
++
+A_{i,k_i}
++
+G_i(p)
+$
+\end{Large}
+
+\vspace{0.5cm}
+\textit{подставляем \hspace{0.2cm}}
+\begin{Large}
+
+$
+p = \lambda_i \text{\hspace{0.2cm}} G(\lambda_i) = 0
+$
+
+\vspace{0.5cm}
+\begin{LARGE}
+$
+2)\text{\hspace{0.2cm}} 
+\frac{Bp + C}{p^2 + \alpha p + \beta}
+= 
+\frac{B(p-\mu) + ( C  + B\mu)\frac{\mu }{\omega}}{(p-\mu)^2 + \omega^2}
+\subset
+Be^{\mu t}cos(\omega t)
++
+\frac{(B\mu + C)}{\omega}e^{\mu t}sin(\omega t)
+$
+\end{LARGE}
+
+
+
+\end{Large}
+\end{flushright}
+
+\begin{Large}
+
+\vspace{0.5cm}
+$
+\chi (t)e^{\beta t} sin(\omega t) 
+\supset
+\frac{\omega}{(p-\beta)^2 + \omega^2}
+$
+
+
+\end{Large}
+
+\vspace{0.5cm}
+\begin{LARGE}
+\textit{\underline{Уравнение n-ого порядка (с постоянными коэфициентами).}}
+\end{LARGE}
+
+\vspace{0.5cm}
+\begin{Large}
+$
+\begin{cases}
+	y^{(n)}(t) + c_{n-1}y^{(n-1)}(t)+\ldots + c_1y^{(1)}(t) +c_0y(t) = f(t) \\
+	y(0) = y_0, \text{\hspace{0.2cm}} y^{(1)}(0), = y_1 \text{\hspace{0.2cm}}, \ldots y^{(n-1)}(0) = y_{n-1}
+\end{cases}
+$
+
+
+\vspace{0.5cm}
+\begin{center}
+$
+y(t) = u(t) + \upsilon(t)
+$
+\end{center}
+
+
+\end{Large}
+
+\begin{normalsize}
+$\\
+\begin{matrix}
+	\begin{cases}
+		u^{(n)}(t) + c_{n-1}u^{(n-1)}(t)+\ldots + c_1u^{(1)}(t) +c_0u(t) = 0 \\
+		u(0) = u_0, \text{\hspace{0.2cm}} u^{(1)}(0), = u_1 \text{\hspace{0.2cm}}, \ldots 			u^{(n-1)}(0) = u_{n-1}
+	\end{cases}
+	&
+	\begin{cases}
+		\upsilon^{(n)}(t) + c_{n-1}\upsilon^{(n-1)}(t)+\ldots + c_1\upsilon^{(1)}(t) +c_0\upsilon (t) = \upsilon \\
+		\upsilon(0) = \upsilon_0, \text{\hspace{0.2cm}} \upsilon^{(1)}(0), = \upsilon_1 \text{\hspace{0.2cm}}, \ldots 			\upsilon^{(n-1)}(0) = \upsilon_{n-1}
+	\end{cases}
+\end{matrix}
+$
+
+\end{normalsize}
+
+\newpage
+\begin{LARGE}
+\textit{\underline{Фундаментальтаное решение(функция Грина).}}
+\end{LARGE}
+
+\vspace{0.5cm}
+$
+G(p) \subset g(t) :
+$
+
+\vspace{0.5cm}
+$
+\begin{cases}
+	g^{(n)}(t) + c_{n-1}g^{(n-1)}(t)+\ldots + c_1g^{(1)}(t) +c_0g(t) = 0 \\
+	g(0) =  \ldots =g^{(n-2)}(0) = 0,\text{\hspace{0.2cm}} g^{(n-1)}(0) = 1
+\end{cases}
+$
+
+\vspace{0.5cm}
+\begin{Large}
+\textit{Либо:}
+\end{Large}
+
+\vspace{0.5cm}
+$
+\begin{cases}
+	g^{(n)}(t) + c_{n-1}g^{(n-1)}(t)+\ldots + c_1g^{(1)}(t) +c_0g(t) = \delta(t)\\
+	g(0) =  \ldots =g^{(n-1)}(0) = 0
+\end{cases}
+$
+
+\vspace{0.5cm}
+$
+p^n G - 1 + c_{n-1}p^{n-1}G + \ldots + c_1pG +c_0G = 0
+$
+
+\vspace{0.5cm}
+$
+\underbrace{(p^n + c_{n-1}p^{n-1} + \ldots + c_1p + c_0)}_{ = Z(p)} G(p) = 1 \text{\hspace{0.2cm}} \Rightarrow \text{\hspace{0.2cm}} G(p) = \frac{1}{Z(p)}
+$
+
+\vspace{0.5cm}
+\textit{Если \text{\hspace{0.2cm}}}
+$
+v \supset V
+$
+
+$
+\begin{matrix}
+ZV=F, & V = \frac{F}{Z} = FG
+\end{matrix}
+$
+\text{\hspace{2cm}}
+$
+v = g\ast f
+$
+
+\vspace{0.5cm}
+a\text{\hspace{0.2cm}}
+$
+u(t) = y_{n-1}g(t) + y_{n-2}
+$
+
+\vspace{0.5cm}
+$
+\begin{cases}
+	y^{\prime\prime}(t) + c_1y^{\prime}(t) + c_0y(t) = 0 \\
+	y(0) = y_0,\text{\hspace{0.2cm}}y^{\prime}(0) = y_1
+\end{cases}
+$
+
+\vspace{0.5cm}
+\begin{Large}
+$
+p^2Y-y_1py_0 + c_1(pY - y_0) + c_0Y = 0
+$
+
+$
+(p^2 + c_1p + c_0)Y = y_1 + y_0(p+c_1)
+$
+
+$
+y = \underbrace{y_1G)}_{\subset y_1g(t)} 
++
+\underbrace{y_0(pG + c_1G)}_{\subset y_0g(t) + c_1g(t)}
+$
+\end{Large}
+
+
+\newpage
+\begin{LARGE}
+\textit{\underline{Пример задачи.}}
+\end{LARGE}
+
+\vspace{0.5cm}
+$
+\begin{cases}
+	x^{\prime\prime}(t) + x(t) = 2cos(t) 
+	\\
+	x(o) = 0, 	\text{\hspace{0.2cm}} x^{\prime}(0) = -1
+\end{cases}
+$
+
+\vspace{0.5cm}
+$
+x(t) \supset X(p) \text{\hspace{0.2cm}} f^{(k)}(t) \supset p^kF(p) - \ldots
+-
+f^{(k-1)}(0)- p^{k-1}f(0)
+$
+
+\vspace{0.5cm}
+\begin{Large}
+$
+\begin{matrix}
+p^2X - (-1)  + X = 2\frac{p}{p^2 + 1} \\
+X(p^2+1) = \frac{2p}{p^2+1} - 1 \\
+X = \frac{2p}{(p^2 + 1)^2} - \frac{1}{p^2 + 1} \\
+x(t) = tsin(t) - sin(t)
+\end{matrix}
+$
+\hspace{2cm}
+$
+\begin{matrix}
+	 \frac{2p}{(p^2 + 1)^2}\subset tsin(t) \\
+	 \frac{1}{p^2 + 1} \subset sin(t)
+\end{matrix}
+$
+
+\end{Large}
+------------------------------------------------------------------------------------
+
+\begin{Large}
+\vspace{0.5cm}
+$
+\begin{cases}
+x^{\prime\prime} -4x = sin(\frac{3t}{2})sin(\frac{t}{2})
+\\
+x(o) = 1, 	\text{\hspace{0.2cm}} x^{\prime}(0) = 0
+\end{cases}
+$
+
+\vspace{0.5cm}
+$
+\frac{1}{2}(cos(\frac{3t}{2}) - cos(\frac{t}{2}) = \frac{1}{2}(cos(t) - cos(2t))
+$
+
+\vspace{0.5cm}
+$
+t^{(k)}(t) \supset p^kF(p) - \Sigma_{i=0}^{k-1}p^if^{k-i-1}(t_0)
+$
+
+\vspace{0.5cm}
+$
+p^2X - p  - 4X = \frac{1}{2}(\frac{1}{p^2+1} +\frac{1}{p^2 - 4})
+$
+
+\vspace{0.5cm}
+$
+(p^2-4)X = \frac{1}{2}(\frac{p}{p^2+1} - \frac{p}{p^2+4})
+$
+
+\vspace{0.5cm}
+$
+X = \frac{1}{2}(\frac{p}{(p^2 + 1)(p^2 - 4)} - \frac{p}{(p^2 + 4)(p^2 -4)}) 
++
+\frac{p}{p^2 - 4}
+$
+
+
+\vspace{0.5cm}
+$
+\frac{p}{(p^2+1)(p^2-4)} - \frac{p}{5(p^2 -4)} = \frac{5p - p^3 + p}{5(p^2+1)(p^2-4)}
+= 
+\frac{4p - p^3}{5(p^2+1)(p^2-4)}
+= 
+\frac{p(4-p^2)}{5(p^2+1)(p^2-4)}
+=
+\frac{-p}{5(p^2+1)}
+$
+
+\vspace{0.5cm}
+$
+\frac{p}{(p-2)(p+2)(p^2+1)} = \overbrace{\frac{A_1}{p-2}}^{=\frac{1}{16}}
+ + 
+\overbrace{\frac{A_2}{p+2}}^{=\frac{1}{16}}
++
+\frac{Bp + C}{p^2 + 4}
+$
+
+\vspace{0.5cm}
+$
+\frac{p}{(p+2)(p^2+1)} = \frac{2}{4*8} = \frac{1}{16}
+$
+
+\vspace{0.5cm}
+$
+\frac{1}{16}(\frac{p+2 +p-2}{p^2 -4}) = \frac{1}{8}\frac{p}{p^2 - 4}
+$
+
+\vspace{0.5cm}
+$
+\frac{p}{(p^2 + 4)(p^2 - 4)} - \frac{p}{8(p^2 - 4)} 
+=
+\frac{8p-p^3-4p}{8(p^2-4)(p^2 +4)}
+=
+\frac{-p(p^2 -4)}{8(p^2-4)(p^2 +4)}
+=
+$
+
+
+\vspace{0.5cm}
+$
+x(t) = ch(2t) + (\frac{1}{26} - \frac{1}{32})e^{2t}
++
+(\frac{1}{26} - \frac{1}{32})e^{-2t}
+$
+\end{Large}
+
+\newpage
+\begin{Large}
+\textit{Матричная экспонента.}
+\end{Large}
+
+\vspace{0.5cm}
+$
+x(t) 
+$
+\hspace{0.2cm} удовлетвояет условию: 
+
+\vspace{0.5cm}
+$
+\begin{cases}
+\frac{dX(t)}{dt} = AX(t)
+\\
+X(0) = I
+\end{cases}
+$
+
+\vspace{0.5cm}
+$
+X(t)\supset\Phi(p)
+$
+
+\vspace{0.5cm}
+$
+p\Phi - I  = A\Phi
+\text{\hspace{0.2cm}}
+\Rightarrow
+\text{\hspace{0.2cm}}
+\Phi(pI - A) = I
+\text{\hspace{0.2cm}}
+\Rightarrow
+\text{\hspace{0.2cm}}
+\Phi(p) = (pI-A)^{-1}
+$
+
+\vspace{0.5cm}
+$
+A = 
+\begin{bmatrix}
+1 &  2 \\
+0 & 1
+\end{bmatrix}
+$
+
+\vspace{0.5cm}
+ $
+\left[\begin{array}{cc|cc} 
+p-1 & -2 & 1 & 0 \\
+0 & p-1 & 0 & 1
+\end{array}\right]
+\rightarrow
+\left[\begin{array}{cc|cc} 
+(p-1)^2 & 0 & p-1 & 2 \\
+0 & p-1 & 0 & 1
+\end{array}\right]
+\rightarrow
+\left[\begin{array}{cc|cc} 
+1 & 0 & \frac{1}{p-1} & \frac{2}{(p-1)^2} \\
+0 & 1 & 0 & \frac{1}{p-1}
+\end{array}\right]
+$ 
+
+
+\vspace{0.5cm}
+$
+\begin{bmatrix}
+\frac{1}{p-1}  & \frac{2}{(p-1)^2}\\
+0 & \frac{1}{p-1}
+\end{bmatrix}
+\subset
+\begin{bmatrix}
+e^t & 2te^t\\
+0 & e^t
+\end{bmatrix}
+=
+e^{At}
+$
+
+
+
+
+
+
+
+\end{large}
+\end{document}
+
+
+\overbrace{}^{}
+\text{\hspace{0.2cm}}
+\hspace{0.2cm}
+\vspace{0.5cm}
