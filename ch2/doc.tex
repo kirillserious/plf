@@ -1,0 +1,41 @@
+\subsection{Примеры}
+
+$$
+	F(\lambda)=\int\limits_{-\infty}^{+\infty}{f(t)e^{-i\lambda t}dt} \mbox{--- прямое преобразование}
+$$
+$$
+	f(t)=\frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}{F(\lambda)e^{i\lambda t}dt} \mbox{--- обратное преобразование}
+$$
+Рассмотрим примеры. 
+\begin{example}
+Пусть $f(t)=e^{-\beta t^2}, \beta > 0, \beta \ne 0, \, \frac{i \lambda t}{\beta}=\frac{2i \lambda t}{2i \beta}=2(\frac{i \lambda}{2 \beta})t$, тогда
+	$$
+		\begin{array}{ll}
+			F(\lambda) = \int\limits_{-\infty}^{+\infty}{e^{-\beta t^2}e^{-i\lambda t}dt}=\int\limits_{-\infty}^{+\infty}{e^{-\beta(t+\frac{i\lambda}{2\beta})^2-\frac{\lambda^2}{4\beta}}dt}=\left\{ s=t+\frac{i\lambda}{\beta} \right\}=\int\limits_{\frac{i\lambda}{2\beta}-\infty}^{\frac{i\lambda}{2\beta}+\infty}{e^{-\beta^2s}ds\cdot e^{\frac{-\lambda^2}{4\beta}}}=\\
+			 =\lim_{R\to+\infty}\cdot e^{\frac{-\lambda^2}{3\beta}}\bigg( \int\limits_{-R+\frac{i\lambda}{2\beta}}^{-R}{(...)ds}+\int\limits_{-R}^{R}{(...)ds}+\int\limits_{R}^{R+\frac{i\lambda}{2\beta}ds} \bigg) =\\ =\left\{
+
+		\bigg| \int\limits_{R}^{R+\frac{i\lambda}{2\beta}}{e^{-\beta s^2}ds}\bigg|
+		=\bigg|\int\limits_{0}^{\frac{\lambda}{2\beta}}{e^{-\beta(R^2-y^2+2iyR)}idy}\bigg| \leq \int\limits_{0}^{\frac{\lambda}{2\beta}}{e^{-\beta (R^2-y^2)}dy} \leq \frac{\lambda}{2\beta}e^{\beta(\frac{\lambda}{4\beta}-R^2)} \underset{R \rightarrow \infty}{\longrightarrow} 0 \right\} =\\
+		=\lim_{R\to +\infty}e^{-\frac{\lambda^2}{4\beta}} \int\limits_{-R}^{R}{e^{-\beta s^2}ds}=e^{-\frac{\lambda^2}{4\beta}}\int\limits_{-\infty}^{+\infty}e^{-\beta s^2}ds= e^{-\frac{\lambda^2}{4\beta}}\sqrt{\frac{\pi}{\beta}}
+
+\end{array}
+$$
+\end{example}
+\begin{example}
+Пусть $f(t)=e^{-\beta|t|},\, \beta>0$, тогда
+$$
+\begin{array}{ll}
+	F(\lambda)=\int\limits_{-\infty}^{+\infty}e^{-\beta|t|}e^{-i\lambda t}dt=\int\limits_{-\infty}^{0}e^{t(\beta-i\lambda)}dt+\int\limits_{0}^{+\infty}e^{t(-\beta-i\lambda)}dt=\\
+	= \frac{e^{t(\beta-i\lambda)}}{(\beta-i\lambda)} \bigg|_{-\infty}^{0} +\frac{e^{t(-\beta-i\lambda)}}{-\beta-i\lambda} \bigg|_{0}^{+\infty}=\frac{1}{\beta-i\lambda}-0+0+\frac{1}{\beta-i\lambda}
+	= \frac{2\beta}{\beta^2+\lambda^2} e^{-\beta|t|} \leftrightarrow \frac{2\beta}{\beta^2+\lambda^2}
+\end{array}
+$$\\
+Таким образом, получили, что $e^{-\beta|t|} \leftrightarrow \frac{2\beta}{\beta^2+\lambda^2}$
+$$
+	\int\limits_{-\infty}^{+\infty}\frac{d\lambda e^{i\lambda t}}{1 + \lambda^2}=\pi e^{-|t|} \implies
+$$
+$$
+	\frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}\frac{2}{1+\lambda^2}e^{i\lambda t}d\lambda=e^{-|t|} \qquad \text{--- обратное преобразование Фурье}
+$$
+
+\end{example}
