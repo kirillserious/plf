@@ -1,0 +1,119 @@
+\section{Быстрое преобразование Фурье}
+
+\[ F_n = \sum \limits_{k = 0}^{N - 1} f_k e^{-\frac{2 \pi i n k}{N}}, n = 0, \ldots, N - 1. \]
+Пусть \( W_N = e^{\frac{2 \pi i}{N}} \), тогда при чётном $N$
+\[ F_n = \sum \limits_{k = 0}^{N - 1} f_k W_k^{-n k} = \sum \limits_{l = 0}^{N / 2 - 1} (f_{2 l} W_N^{-n (2 l)} + f_{2 l + 1} W_N^{-n (2 l + 1)}) = \sum \limits_{l = 0}^{N / 2 - 1} (f_{2 l} W_{N / 2}^{-n l} + f_{2 l + 1} W_N^{-n} W_{N / 2}^{-n l}) = \]
+\[ = \sum \limits_{l = 0}^{N / 2 - 1} (f_{2 l} + f_{2 l + 1} W_N^{-n}) W_{N / 2}^{-n l} = \sum \limits_{l = 0}^{N / 2 - 1} f_{2 l} W_{N / 2}^{-n l} + W_N^{-n} \sum \limits_{l = 0}^{N / 2 - 1} f_{2 l + 1} W_{N / 2}^{-n l}. \]
+При \( N = 2^k \) имеем \( N \cdot k \) вычислений.
+
+\subsection*{Задача}
+
+\( x \in [0, l]; \)  
+\[ \left\lbrace \begin{aligned}
+    & u_{xx}''(x) - \mu u(x) = f(x), \\
+    & u(0) = u_0, \\
+    & u(l) = u_1.
+\end{aligned} \right. \]
+Пусть \( u(x) = v(x) + \dfrac{u_1 - u_0}{l} x \), тогда \( u'(x) = v'(x) + \dfrac{u_1 - u_0}{l}, u''(x) = v''(x) \), и
+\[ \left\lbrace \begin{aligned}
+    & v_{xx}''(x) - \mu v(x) = f(x) + \mu \dfrac{u_1 - u_0}{l} x = g(x), \\
+    & v(0) = u_0, \\
+    & v(l) = u_0.
+\end{aligned} \right. \]
+Тогда без ограничения общности
+\[ \left\lbrace \begin{aligned}
+    & u_{xx}''(x) - \mu u(x) = f(x), \\
+    & u(0) = u_0, \\
+    & u(l) = u_0.
+\end{aligned} \right. \]
+\( h = \dfrac{l}{N}; x_i = \dfrac{i l}{N}, y_i = u(x_i), \varphi_i = f(x_i), i = 0, \ldots, N \).
+
+Разностная схема:
+\[ \left\lbrace \begin{aligned}
+    & \dfrac{y_{i + 1} - 2 y_i + y_{i - 1}}{h^2} - \mu y_i = \varphi_i, i = 1, \ldots, N - 1 \\
+    & y_0 = y_N = u_0
+\end{aligned} \right. \]
+\[ y_n = \sum \limits_{k = 0}^{N - 1} a_k e^{-\frac{2\pi i n k}{N}}, a_k = \dfrac{1}{N} \sum \limits_{n = 0}^{N - 1} y_n e^{\frac{2\pi i n k}{N}} \]
+\[ \varphi_n = \sum \limits_{k = 0}^{N - 1} b_k e^{-\frac{2 \pi i n k}{N}}, b_k = \dfrac{1}{N} \sum \limits_{n = 0}^{N - 1} \varphi e^{\frac{2 \pi i n k}{N}}. \]
+Подставим соотношения в систему:
+\[ \sum \limits_{k = 0}^{N - 1} a_k \left[ \dfrac{e^{-\frac{2\pi i (n + 1) k}{N}} - 2 e^{-\frac{2\pi i n k}{N}} + e^{-\frac{2\pi i (n - 1) k}{N}}}{h^2} - \mu e^{-\frac{2\pi i n k}{N}} \right] = \sum \limits_{k = 0}^{N - 1} b_k e^{-\frac{2\pi i n k}{N}}, \]
+\[ a_k \left[ \dfrac{e^{-\frac{2 \pi i n k}{N}} - 2 + e^{\frac{2\pi i n k}{N}}}{h^2} - \mu \right] = b_k, a_k \left[ \dfrac{2 \cos{\dfrac{2 \pi k}{N}} - 2}{h^2} - \mu \right] = b_k, \]
+\[ a_k \left[ -\dfrac{4}{h^2} \sin^2 \dfrac{\pi k}{N} - \mu \right] = b_k \Rightarrow a_k = -\dfrac{b_k}{\frac{4}{h^2} \sin^2 \frac{\pi k}{N} + \mu}. \]
+
+\[ b_k = \dfrac{1}{N} \varphi_0 + \dfrac{1}{N} \sum \limits_{n = 1}^{N - 1} \varphi_n e^{\frac{2 \pi i n k}{N}} = \dfrac{1}{N} \varphi_0 + b_k^0; \]
+\( b_k^0 \) получаются из \( 0, \varphi_1, \ldots, \varphi_{n-1} \) при помощи ОДПФ (обратного дискретного преобразования Фурье).
+\[ a_k = -\dfrac{-\frac{1}{N} \varphi_0 + b_k^0}{\frac{4}{h^2} \sin^2 \frac{\pi k}{N} + \mu} = \dfrac{\varphi_0}{N \left( \frac{4}{h^2} \sin^2 \frac{\pi k}{N} + \mu \right)} + a_k^0, a_k^0 = -\dfrac{b_k^0}{\frac{4}{h^2} \sin^2 \frac{\pi k}{N} + \mu}. \]
+\[ y_n = -\varphi_0 \sum \limits_{k = 0}^{N - 1} \dfrac{\frac{1}{N} e^{-\frac{2\pi i n k}{N}}}{\frac{4}{N^2} \sin^2 \frac{\pi k}{N} + \mu} + \sum \limits_{k = 0}^N a_k^0  e^{-\frac{2 \pi i n k}{N}} = -\varphi_0 c_n + y_n^0. \]
+\[ y_0 = y_N = -\varphi_0 c_0 + y_0^0 = u_0, \varphi_0 = \dfrac{y_0^0 - u_0}{c_0}. \]
+
+Итоговая схема решения задачи:
+\[ 0, \varphi_1, \ldots, \varphi_{N-1} \xrightarrow[]{\text{ОДПФ}} b_k^0 \rightarrow a_k^0 \xrightarrow[]{\text{ПДПФ}} y_n^0 \rightarrow \varphi_0, \varphi_1, \ldots, \varphi_{N-1} \xrightarrow[]{\text{ОДПФ}} b_k \rightarrow a_k \xrightarrow[]{\text{ПДПФ}} y_n \]
+
+\section{Многомерное преобразование Фурье}
+
+\( f(x) = f(x_1, \ldots, x_m) \leftrightarrow F(\lambda) = F(\lambda_1, \ldots, \lambda_m). \)
+\[ F(\lambda) = \int \limits_{\mathbb{R}^m} f(x) e^{-i \left\langle \lambda, x \right\rangle} \, dx = \int \limits_{-\infty}^{+\infty} e^{-i \lambda_1 x_1} \, dx_1 \int \limits_{-\infty}^{+\infty} e^{-i \lambda_2 x_2} \, dx_2 \int \limits_{-\infty}^{+\infty} \ldots \int \limits_{-\infty}^{+\infty} f(x_1, \ldots, x_m) e^{-i \lambda_m x_m} \, dx_m \].
+\[ f(x) = \dfrac{1}{(2 \pi)^m} \int \limits_{\mathbb{R}^m} F(\lambda) e^{i \left\langle \lambda, x \right\rangle} \, d\lambda. \]
+
+Дискретное преобразование Фурье: \( f_{k_1 \ldots k_m} \leftrightarrow F_{n_1 \ldots n_m} \).
+\[ F_{n_1 \ldots n_m} = \sum \limits_{k_1 = 0}^{N_1 - 1} \ldots \sum \limits_{k_m = 0}^{N_m - 1} e^{-2 \pi i \left( \frac{k_1 n_1}{N_1} + \ldots + \frac{k_m n_m}{N_m} \right)} \cdot f_{k_1 \ldots k_m} \]
+\[ f_{k_1 \ldots k_m} = \dfrac{1}{N_1 \ldots N_m} \sum \limits_{n_1 = 0}^{N_1 - 1} \ldots \sum \limits_{n_m = 0}^{N_m - 1} e^{2 \pi i \left( \frac{k_1 n_1}{N_1} + \ldots + \frac{k_m n_m}{N_m} \right)} \cdot F_{n_1 \ldots n_m} \]
+
+\subsection*{Задача}
+
+\[ \left\lbrace \begin{aligned}
+    & u_{tt} = a^2 \Delta u + f, \\
+    & u(0, x, y) = u^0 (x, y), \\
+    & u_t'(0, x, y) = u^1 (x, y),
+\end{aligned} \right. -\infty < x < +\infty, -\infty < y < +\infty. \]
+\[ u(t, x, y) \leftrightarrow U(t, \lambda, \mu), \]
+\[ u^0(x, y) \leftrightarrow U^0(\lambda, \mu), \]
+\[ u^1(x, y) \leftrightarrow U^1(\lambda, \mu), \]
+\[ f(t, x, y) \leftrightarrow F(t, \lambda, \mu). \]
+\[ U(t, \lambda, \mu) = \int \limits_{-\infty}^{+\infty} \, dx \int \limits_{-\infty}^{+\infty} u(t, x, y) e^{-i(\lambda x + \mu y)} \, dy \]
+\[ u_t \leftrightarrow U_t, u_{tt} \leftrightarrow U_{tt} \]
+\[ \Delta u = u_{xx} + u_{yy}; \Delta u \leftrightarrow (i \lambda)^2 U + (i \mu)^2 U = -(\lambda^2 + \mu^2) U. \]
+\[ \left\lbrace \begin{aligned}
+    & U_tt = -a^2 (\lambda^2 + \mu^2) U + F \\
+    & U(0, \lambda, \mu) = U^0(\lambda, \mu) \\
+    & U_t(0, \lambda, \mu) = U^1(\lambda, \mu)
+\end{aligned} \right. \]
+Решаем полученную систему: пусть \( v = U, w = v_t, \varphi = F, v(0) = v^0, v'(0) = v^1, b = \sqrt{\lambda^2 + \mu^2} \) тогда 
+\[ \left\lbrace \begin{aligned} 
+    & v_t = w  \\
+    & w_t = -b^2 v + \varphi \\
+    & v(0) = v^0 \\
+    & w(0) = v^1
+\end{aligned} \right. \]
+Пусть
+\( A = \begin{bmatrix}
+    0 & 1 \\
+    -b^2 & 0
+\end{bmatrix}, \)
+тогда
+\[ \begin{bmatrix} u(t) \\ w(t) \end{bmatrix} = e^{At} \begin{bmatrix} u^0 \\ u^1 \end{bmatrix} + \int \limits_0^t e^{A(t - \tau)} \begin{bmatrix} 0 \\ \varphi(\tau) \end{bmatrix} \, d\tau; \]
+\( e^{At} = \begin{bmatrix}
+    \cos{bt} & -\frac{1}{b} \sin{bt} \\
+    b \sin{bt} & \cos{bt}
+\end{bmatrix} \),
+\[ \Rightarrow v = \cos{(bt)} v^0 - \dfrac{1}{b} \sin{(bt)} v^1 + \int \limits_0^t \sin{(b (t - s))} \varphi(s) \, ds \]
+\[ \Rightarrow U(t, \lambda, \mu) = \cos{(a \sqrt{\lambda^2 + \mu^2} t)} \cdot U^0(\lambda, \mu) -\dfrac{1}{a \sqrt{\lambda^2 + \mu^2}} \sin{(a \sqrt{\lambda^2 + \mu^2} t)} \cdot U^1(\lambda, \mu) - \]
+\[ - \dfrac{1}{a \sqrt{\lambda^2 + \mu^2}} \int \limits_0^1 \sin{(a \sqrt{\lambda^2 + \mu^2} (t - s))} F(s, \lambda, \mu) \, ds. \]
+
+\subsection*{Задача}
+
+\[ \left\lbrace \begin{aligned}
+    & u_{xx}'' + u_{yy}'' - \mu u = f, \\
+    & u(x, 0) = u(x, 1) = \xi(x), \\
+    & u(0, y) = u(1, y) = \eta(y), \\
+    & \xi(0) = \eta(0),
+\end{aligned} \quad x \in [0, 1], y \in [0, 1]. \right. \]
+
+\( h_x = \dfrac{1}{M}, h_y = \dfrac{1}{N}, y_{ij} = u(x_i, y_j), x_i = i h_x, y_j = j h_y. \)
+
+\[ y_{kl} = \sum \limits_{m = 0}^{M - 1} \sum \limits_{n = 0}^{N - 1} a_{mn} e^{-2 \pi i \left( \frac{mk}{M} + \frac{nl}{N} \right)} \]
+\[ \varphi_{kl} = \sum \limits_{m = 0}^{M - 1} \sum \limits_{n = 0}^{N - 1} b_{mn} e^{-2\pi i \left( \frac{mk}{M} + \frac{nl}{N} \right)} \]
+По аналогии с одномерным случаем, \( a_{mn} = -\dfrac{b_{mn}}{\frac{4}{h_x^2} \sin^2 \frac{\pi m}{M} + \frac{4}{h_y^2} \sin^2 \frac{\pi n}{N} + \mu}. \)
+\[ y_{k0} = \alpha_k, k = 1, \ldots, M - 1; \]
+\[ y_{0l} = \beta_l, l = 1, \ldots, N - 1; \]
+\[ \alpha_0 = \beta_0. \]
