@@ -1,0 +1,125 @@
+        \begin{theorem}[Муавра - Лапласа]
+      Рассмотрим схему Бернулли с вероятностью успеха $p$:
+        \begin{gather*}
+        \xi_k = \begin{cases}
+        0, &q\\
+        1, &p
+        \end{cases}\\
+        S_n = \sum_{k=1}^{n} \xi_k\\
+        \sigma_n = \dfrac{S_n - \Exp S_n}{\sqrt{\Var S_n}}\\[8pt]
+        p_k(x) = q \delta(x) + p\delta(x-1) = \dfrac{dF_k}{dt} \text{ (в обобщенном смысле)}\\
+        F_k(x) = \Prb\{\xi_k < x\}
+        \end{gather*}
+        Тогда 
+        \begin{equation}\sigma_n \xrightarrow[n \to \infty]{\text{слабо}} \sigma \sim N(0,1).\end{equation}
+        \end{theorem}
+        Разложим функцию на непрерывную и функцию скачков:
+        \begin{gather*}
+        f(x) = f_{\text{непрер.}} (x) + f_{\text{скачков}}(x)\\
+        \end{gather*}
+        \begin{equation}
+        f'(x) = f_{\text{непрер.}}'(x) + \sum h_j \delta(x - x_j) \text{равенство в смысле интегралов}
+        \end{equation}
+        $$\varphi(\cdot) \in D$$
+        \begin{equation}
+        \int_{-\infty}^{+\infty} f'(x) \varphi(x) dx = \int_{-\infty}^{+\infty} f_{\text{непрер.}}'(x) \varphi(x) dx + \int_{-\infty}^{+\infty} \sum h_j \delta(x - x_j) f(x) dx
+        \end{equation}
+        \begin{equation}
+        \int_{-\infty}^{+\infty} f'(x) \varphi(x) dx = - \int_{-\infty}^{+\infty} f(x) \varphi'(x) dx
+        \end{equation}
+        \begin{equation}
+        f_k(x) = \Exp e^it\xi = \int_{-\infty}^{+\infty} e^{itx}(q\delta(x) + p\delta(x-1))dx = qe^{it} + pe^{it}
+\end{equation}
+\begin{gather*}
+\Exp \xi_k = p\\
+\Exp S_n = np\\
+\Var S_n = n \Var \xi_k = npq\\
+\sigma_n = \sum_{k = 1}^{n} \tilde{\xi}_k, \quad \tilde{\xi}_k = \dfrac{\xi_k - p}{\sqrt{npq}}\\
+f_{\tilde{\xi}_k}(t) = q e\left\{\dfrac{-ipt}{\sqrt{npq}}\right\} + pe\left\{\dfrac{it(1-p)}{\sqrt{npq}}\right\}\\
+f_{\sigma_n}(t) = \left[ q e\left\{\dfrac{-ipt}{\sqrt{npq}}\right\} + pe\left\{\dfrac{it(1-p)}{\sqrt{npq}}\right\} \right]^n \to \;?, \quad n \to \infty\\
+\psi(0) = 1\\
+\psi ' (z) = -\dfrac{ipq}{\sqrt{pq}} e\left\{\dfrac{-ipz}{\sqrt{pq}}\right\} + \dfrac{ipq}{\sqrt{pq}} e\left\{\dfrac{iqz}{\sqrt{pq}}\right\} \Rightarrow \psi '(0) = 0\\
+\psi(z) = q e\left\{\dfrac{-ipz}{\sqrt{pq}}\right\} + pe\left\{\dfrac{iqz}{\sqrt{pq}}\right\}\\
+\psi'(z) = -\dfrac{p^2 q^2}{pq}e\left\{\dfrac{-ipz}{\sqrt{pq}}\right\} - \dfrac{pq^2}{pq} e\left\{\dfrac{iqz}{\sqrt{pq}}\right\} \Rightarrow \psi''(0) = -1\\
+\Rightarrow \psi(z) = 1 - \frac{1}{2}z^2 + \overline{o}(z^2)\\
+\Rightarrow f_{\sigma_n}(t) = \left[1 - \frac{t^2}{2n} + \overline{o}\left(\frac{t^2}{n}\right) \right]^n \xrightarrow[n \to \infty]{} e^{-\frac{t^2}{2}}\\
+\sigma \sim N(0,1)\\
+p(x) = \dfrac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}\\
+f(t) = e^{-\frac{t^2}{2}}\\
+\sigma_n \xrightarrow[n \to \infty]{\text{слабо}} \sigma \sim N(0,1)
+\end{gather*}
+$f(t)$ --- обычная (необобщенная) функция, $f \in C^1, \; f' \in L_1, \; f \in L_1.$\\
+Гребенчатая функция:
+$$d_{\Delta_t} = \sum_{k = -\infty}^{+\infty} \delta(t - k \Delta_t).$$
+$$\int_{-\infty}^{+\infty} d_{\Delta_t} (t) \varphi(t) dt = \sum_{k = -\infty}^{+\infty} \varphi(k \Delta_t), \quad \varphi(\cdot) \in D.$$
+\begin{enumerate}
+\item Дискретизация\\
+\begin{gather*}
+f_{\Delta_t}(t) = f(t) d_{\Delta_t} (t) = \int_{-\infty}^{+\infty} f(t) d_{\Delta_t} (t) \varphi(t) dt = \\
+= \int_{-\infty}^{+\infty} \sum_{k = -\infty}^{+\infty} f(k \Delta_t) \delta(t - k\Delta_t) \varphi(t) dt =\\
+= \sum_{k = -\infty}^{\infty} f(k \Delta_t) \varphi(k \Delta_t)
+\end{gather*}
+\item Продолжение по периоду\\
+$$f_{\Delta_t}^0(t) = \left[f(\cdot)\ast d_{\Delta_t}(\cdot) \right](t) = \int_{-\infty}^{+\infty} f(s) \sum_{k = -\infty}^{+\infty} \delta (t - s - k\Delta_t)ds = \sum_{k=-\infty}^{+\infty} f(t - k\Delta_t)$$
+$f_{\Delta_t}^0 (t + \Delta_t) = f_{\Delta_t}^0(t)$ --- периодическая с периодом $\Delta_t$.\\
+Пусть $F(\lambda)$ --- преобразование Фурье для $f(t)$.
+Разложим $f_{\Delta_t}^0$ в ряд Фурье.
+\begin{gather*}
+f_{\Delta_t}^0 = \sum_{l =  -\infty}^{+\infty} C_l e \left\{ \dfrac{2\pi itl}{\Delta_t} \right\}\\
+C_l = \dfrac{1}{\Delta_t} \int_{-\frac{\Delta_t}{2}}^{\frac{\Delta_t}{2}} f_{\Delta_t}^0(s) e \left\{-\dfrac{2\pi isl}{\Delta_t}\right\}ds = \dfrac{1}{\Delta_t} \sum_{k = -\infty}^{+\infty} \int_{-\frac{\Delta_t}{2}}^{\frac{\Delta_t}{2}} f_{\Delta_t}^0(\underbrace{s - k\Delta_t}_r) e \left\{-\dfrac{2\pi isl}{\Delta_t}\right\}ds =\\
+= \dfrac{1}{\Delta_t} \sum_{k = -\infty}^{+\infty} \int_{-\frac{\Delta_t}{2} - k\Delta_t}^{\frac{\Delta_t}{2} - k\Delta_t} f(r) e \left\{-\dfrac{2\pi il(r + k\Delta_t)}{\Delta_t}\right\}dr =
+\left\{e^{-2\pi i k l} = 1\right\} =\\
+=\dfrac{1}{\Delta_t} \sum_{k = -\infty}^{+\infty} \int_{-\frac{\Delta_t}{2} - k\Delta_t}^{\frac{\Delta_t}{2} - k\Delta_t} f(r) e \left\{-\dfrac{2\pi ilr}{\Delta_t}\right\}dr =\dfrac{1}{\Delta_t} F\left(\frac{2 \pi l}{\Delta_t}\right)  
+\end{gather*}
+\begin{equation}
+f_{\Delta_t}^0 = \dfrac{1}{\Delta_t} \sum_{l = -\infty}^{+\infty}  F\left(\frac{2 \pi l}{\Delta_t}\right) e \left\{\frac{2\pi i l t}{\Delta_t} \right\}
+\end{equation}
+\end{enumerate}
+$f(t) = \delta(t)$ приблизим нормальными функциями.\\
+$$f_n(\cdot) \xrightarrow[n\to\infty]{\text{сл.}} f(\cdot).$$
+То есть
+$$\int_{-\infty}^{+\infty} f_n(t) \varphi(t) dt \xrightarrow[n \to +\infty]{} \int_{-\infty}^{+\infty} f(t) \varphi(t) dt.$$
+\begin{gather*}
+f_n(t) \longleftrightarrow F_n(\lambda)\\
+f_{n,\Delta_t}^0 (t) = \sum_{l=-\infty}^{+\infty} F_n\left(\frac{2\pi l}{\Delta_t}\right) e\left\{\frac{2\pi i l t}{\Delta_t} \right\} \xrightarrow[n\to\infty]{\text{сл.}} \int_{-\infty}^{+\infty} \dots \varphi(t) dt
+\end{gather*}
+$\delta(t)$ принимает значение 0 с вероятностью 1.
+$$\int_{-\infty}^{+\infty} f_n(t) \varphi(t) dt \xrightarrow[n\to\infty]{} \varphi(0).$$
+\begin{gather*}
+\int_{-\infty}^{+\infty} \delta(t) e^{-i\lambda t} dt = e^{-i\lambda \cdot 0} = 1\\
+\delta(t) = \dfrac{1}{2\pi} \int_{-\infty}^{+\infty} 1 \cdot e^{i\lambda t} d\lambda
+\end{gather*}
+Последнее равенство не стоит понимать как равенство чисел, ведь дельта-функция является, вообще говоря, обобщенной функцией.\\
+\begin{center}
+\fbox{
+$\delta(t) \longleftrightarrow 1$
+}
+\end{center}
+
+\begin{gather*}
+\int_{-\infty}^{+\infty} \delta(t) \varphi(t) dt = \dfrac{1}{2\pi} \int_{-\infty}^{+\infty}\left[ \int_{-\infty}^{+\infty} e^{i\lambda t} d\lambda\right] \varphi(t) dt = \{\text{т. Фубини}\} =\\
+= \dfrac{1}{2\pi} \int_{-\infty}^{+\infty} d\lambda \int_{-\infty}^{+\infty} \varphi(t) e^{i\lambda t} dt
+\end{gather*}
+\begin{center}
+\fbox{
+$1 \longleftrightarrow 2\pi \delta(\lambda)$
+}
+\end{center}
+Пусть $f(t) = \delta(t)$, тогда $$f_{\Delta_t}^0 (t) = d_{\Delta_t}(t) = \dfrac{1}{\Delta_t} \sum_{l = -\infty}^{+\infty} e \left\{\frac{2\pi i l t}{\Delta_t} \right\}.$$
+Последняя формула называется формулой суммирования Пуассона.\\
+Пусть $f,g$ --- гладкие, быстро затухающие при $t \to \pm \infty$.
+$$h(t) = \sum_{k = -\infty}^{+\infty} g(t) f(t - k\Delta_t) = f_{\Delta_t}^0  \cdot g(t) \longleftrightarrow H(\lambda) ?$$
+Пусть 
+$$f(t) \longleftrightarrow F(\lambda), \quad g(t) \longleftrightarrow G(\lambda).$$
+\begin{gather*}
+H(\lambda) = \dfrac{1}{\Delta_t} \int_{-\infty}^{+\infty} g(t) \sum_{l = -\infty}^{+\infty} F\left(\frac{2\pi l}{\Delta_t}\right) e\left\{\frac{2 \pi i l t - i \lambda t}{\Delta_t} \right\} dt = \dfrac{1}{\Delta_t} \sum_{l =-\infty}^{+\infty} F \left( \frac{2\pi l}{\Delta_t} \right)G\left(\lambda - \frac{2\pi l}{\Delta_t} \right)\\
+g(t) \equiv 1\\
+f(t) \equiv \delta(t)\\
+h(t) = d_{\Delta_t} (t) = \sum_{k = -\infty}^{+\infty} \delta(t - k\Delta_t)\\
+H(\lambda) = \dfrac{2\pi}{\Delta_t} \sum_{l=-\infty}^{+\infty} \delta\left(\lambda - \frac{2 \pi l}{\Delta_t}\right)
+\end{gather*}
+\begin{center}
+\fbox{$
+d_{\Delta_t}(t) \longleftrightarrow \frac{2\pi}{\Delta_t} d_{\frac{2\pi}{\Delta_t}} (\lambda)
+$}   
+\end{center}
