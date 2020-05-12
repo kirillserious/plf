@@ -1,74 +1,113 @@
-\section{Преобразование Лапласа-Фурье}
-\subsection{Некоторые сведения из ТФКП}
-Перед тем, как приступить непосредственно к преобразованиям Фурье, вспомним, для начала, курс ТФКП. 
+\part{Преобразование Лапласа--Фурье}
+\section{Некоторые сведения из комплексного анализа}
+        
+Перед тем, как перейти непосредственно к теме лекций, стоит привести известные сведения из курса <<Теории функций комплексного переменного>>. Итак рассмотрим функцию
+$$
+        f(z) = u(x,\,y) + i v(x,\,y), \quad \mbox{где } z = x + iy.
+$$
 
-Вспомним как задается функция комплексной переменной:
+\subsection{Основные определения}
+\begin{definition}
+        \textit{Производной} функции $f(z)$ в точке $z_0 = x_0 + i y_0$ называется
 $$
-f(z)=u(x,y)+iv(x,y),\quad z=x+iy
+        f'(z_0)
+        =
+        \lim_{\Delta\,z\to\,0}\frac{\Delta\,f}{\Delta\,z}
+        =
+        \lim_{\Delta\,z\to\,0}\frac{f(z_0+\Delta\,z)-f(z_0)}{\Delta\,z},
+        \quad\mbox{где } \Delta\,z=\Delta\,x+i\Delta\,y.
 $$
-Производная в точке $z_0$:
+\end{definition}
+\begin{theorem}[Условия Коши--Римана]
+        Для того чтобы функция $f(z)$ была дифференцируема в точке $z_0 = x_0 + i y_0$ необходимо и достаточно, чтобы её вещественная и мнимая части $u(x,\,y)$ и $v(x,\,y)$ были дифференцируемы в точке $(x_0,\, y_0)$ и чтобы, кроме того, в этой точке выполнялись условия Коши--Римана:
 $$
-f'(z_0)=\lim_{\Delta\,z\to\,0}\dfrac{\Delta\,f}{\Delta\,z}=\lim_{\Delta\,z\to\,0}\dfrac{f(z_0+\Delta\,z)-f(z_0)}{\Delta\,z},\quad\text{где } \Delta\,z=\Delta\,x+i\Delta\,y
+        \begin{cases}
+u'_x = \;\;\,v'_y,\\
+u'_y = -v'_x.
+        \end{cases}
 $$
-\begin{enumerate}
-\item $\Delta\,z = \Delta\,x$: 
+\end{theorem}
+\begin{definition}
+        \textit{Интегралом} функции $f(z)$ по некоторой кусочно-гладкой кривой
+        $\Gamma = \{\, z = z(t) \,:\, dz(t) = z'(t)dt,\, t \in [t_0,\,t_1]\,\}$
+        называется следующий предел последовательности интегральных сумм
 $$
-\lim_{\Delta\,x\to\,0}\dfrac{u(x_0+\Delta\,x,y_0)+iv(x_0+\Delta\,x,y_0)-u(x_0,y_0)-iv(x_0,y_0)}{\Delta\,x}\Rightarrow\:\exists\:u_x,v_x:\:\lim_{\Delta\,x\to\,0}\{\ldots\}=u'_x+iv'_x
+        \sum\limits_{j=1}^{N}f(\xi_j)\Delta z_j
+        \xrightarrow[\Delta z_j \to 0]{}
+        \int_{\Gamma}f(z)\,dz,
+        \quad
+        \mbox{где }
+        \xi_j \in [z_{j-1},\,z_j],\,
+        \Delta\,z_j=z_j-z_{j-1}.
 $$
-\item $\Delta\,z = i\Delta\,y$: 
-$$
-\lim_{\Delta\,y\to\,0}\dfrac{u(x_0,y_0+\Delta\,y_0)+iv(x_0,y_0+\Delta\,y_0)-u(x_0,y_0)-iv(x_0,y_0)}{i\Delta\,y}\Rightarrow\:\exists\:u_y,v_y:\:\lim_{\Delta\,y\to\,0}\{\ldots\}=-iu'_y+v'_y
-$$
-\end{enumerate}
-Условия Коши-Римана:
-$$
-\begin{cases}
-u'_x=v'_y\\
-u'_y=-v'_x
-\end{cases}
-$$
-Напомним, что интеграл от функции комплексного переменного вводится (так же, как и в действительной области) как предел последовательности интегральных сумм; функция при этом определена на некоторой кривой $\Gamma$, кривая предполагается гладкой или кусочно-гладкой:
-$$
-\sum\limits_{j=1}^{N}f(\xi_j)\Delta\,z_j\longrightarrow
-\int_{\Gamma}f(z)dz;\quad \Delta\,z_j=z_j-z_{j-1},\: \Gamma: z=z(t),\: dz=z'(t)dt,\: t\in[t_0,t_1]
-$$
-Тогда 
-$$
-\int_{\Gamma}f(z)dz=\int\limits_{t_0}^{t_1}f(z(t))z'(t)dt=\int\limits_{t_0}^{t_1}\left[(u'_x-v'_y)+i(v'_x+u'_y)\right]dt=\int_{\Gamma}udx-vdy + i\int_{\Gamma}vdx+udy 
-$$
-Среди интегралов в комплексном анализе важное место в теории и практике  интегрирования и приложениях занимает интеграл вида $\int_{\Gamma}\dfrac{f(\zeta)}{\zeta-z}d\zeta$, зависящий от $\zeta$. 
+Из определения получаем также
+\begin{multline*}
+        \int_{\Gamma}f(z)\,dz
+        =
+        \int_{t_0}^{t_1}f(z(t))z'(t)\,dt
+        =
+        \int_{t_0}^{t_1}\left[(u'_x-v'_y)+i(v'_x+u'_y)\right]\,dt
+        =\\=
+        \int_{\Gamma}(udx-vdy) + i\int_{\Gamma}(vdx+udy). 
+\end{multline*}
+\end{definition}
 
-В частности, полагая $f(z)$ аналитической в замкнутой области $\gamma$, получаем, что для любой точки аналитичности функция может быть записана в виде интеграла
+\begin{definition}
+        Функция $f(z)$ называется \textit{аналитической} в некоторой области $A \subset \mathbb{C}$ если выполняется одно из четырёх равносильных условий:
+        \begin{enumerate}
+\item Ряд Тейлора функции в каждой точке $z \in A$ сходится к $f(z)$;
+\item Функция дифференцируема в каждой точке $z \in A$;
+\item В каждой точке $z \in A$ выполняются условия Коши--Римана;
+\item Интеграл $\oint\limits_\Gamma f(z)\,dz = 0$ для любой замкнутой кривой $\Gamma \subset A$.
+        \end{enumerate}
+\end{definition}
+
+\begin{assertion}
+        Пусть функция $f(z)$ аналитична в замкнутой области $\gamma$, тогда в любой точке $z \in \gamma$ её можно представить в виде интеграла
 $$
-f(z)=\dfrac{1}{2\pi\,i}\oint\limits_{\gamma}\dfrac{f(\zeta)}{\zeta-z}d\zeta.
+        f(z)
+        =
+        \frac{1}{2\pi i}\oint\limits_{\gamma}\dfrac{f(\xi)}{\xi-z}\,d\xi.
 $$
-Аналитическая функция имеет производные любого порядка, для которых справедлива формула
+\end{assertion}
+\begin{assertion}
+      Пусть функция $f(z)$ аналитична в замкнутой области $\gamma$, тогда в любой точке $z \in \gamma$ она имеет производные любого поряка и справедлива формула:
 $$
-f^{(k)}(z)=\dfrac{k!}{2\pi\,i}\oint\limits_{\gamma}\dfrac{f(\zeta)}{(\zeta-z)^{k+1}}d\zeta.
-$$
-Теперь дадим определение ряда Лорана необходимого для последующего повествования
+        f^{(k)}(z)
+        =
+        \frac{k!}{2\pi i}
+        \oint\limits_{\gamma}\frac{f(\xi)}{(\xi-z)^{k+1}}\,d\xi.
+$$ 
+\end{assertion}
+
+
+\subsection{О теории вычетов}
+
 \begin{definition}\label{ch1.lor}
 Ряд 
-\begin{equation}
-\sum_{n=-\infty}^{\infty} c_n(z-z_0)^n
-\end{equation}
-
-называется рядом Лорана функции $f(z)$, если его коэффициенты вычисляются по формуле
+$
+\sum\limits_{n=-\infty}^{\infty} c_n(z-z_0)^n
+$
+называется \textit{рядом Лорана} функции $f(z)$, если его коэффициенты вычисляются по формуле
 $$
-c_n= \frac{1}{2\pi i} \oint\limits_{\gamma} \frac{f(z)}{(z-z_0)^{n+1}}\,dz,\quad n=0,\pm1,\pm2,\ldots
+        c_n
+        = 
+        \frac{1}{2\pi i} 
+        \oint\limits_{\gamma}
+        \frac{f(z)}{(z-z_0)^{n+1}}\,dz,\quad\mbox{где } n=0,\,\pm1,\,\pm2,\,\ldots.
 $$
 \end{definition}
-\begin{remark}
-$\sum_{n=0}^{\infty}c_n(z-a)^n$ -- правильная часть ряда Лорана и
-$\sum_{n=-\infty}^{-1}{c_{n}}{(z-a)^n}$ -- главная часть ряда Лорана.
-При этом, ряд Лорана считается сходящимся тогда и только тогда, когда сходятся его правильная и главная части.
+
+\begin{remark} При этом
+$\sum_{n=0}^{\infty}c_n(z-a)^n$ называется \textit{правильной частью} ряда Лорана, а
+$\sum_{n=-\infty}^{-1}{c_{n}}{(z-a)^n}$ -- \textit{главной частью}. 
+Ряд Лорана сходится тогда и только тогда, когда сходятся его правильная и главная части.
 \end{remark}
-Важное место в изучении и применении теории функций комплексного переменного занимает исследование их поведения в особых точках, где нарушается аналитичность функции. В частности, это точки, где функция не определена.
 
-Одной из таких особых точек является полюс.
 \begin{definition}
-Говорят, что изолированная точка $z_0\in \overline{C}$ функции $f(z)$ называется полюсом, если $\lim\limits_{z\to z_0}f(z)=\infty$.
+Говорят, что изолированная точка $z_0\in \overline{\mathbb{C}}$ функции $f(z)$ называется \textit{полюсом}, если $\lim\limits_{z\to z_0}f(z)=\infty$.
 \end{definition}
+
 \begin{remark}
 Номер старшего члена главной части ряда Лорана функции в ее разложении в окрестности полюса называется порядком полюса.
 Главная часть ряда Лорана в случае полюса порядка и записывается следующим образом:
@@ -83,15 +122,27 @@ c_n\cdot z^n+ c_{n-1}\cdot z^{n-1}+\ldots+c_1\cdot z,\quad c_n\ne0.
 $$
 \end{itemize}
 \end{remark}
+
 \begin{definition}
-Вычетом функции f(z) в изолированной особой точке $z_0~(z_0\in \overline{\mathbb{C}})$ называется интеграл $\dfrac{1}{2\pi i}\oint\limits_{\gamma} f(z)\,dz$, где $\gamma$ — контур, принадлежащий окрестности точки $z_0$ и охватывающий ее. 
+        Назовём особой точку, в которой нарушается аналитичность функции $f(z)$.
+        \textit{Вычетом} функции $f(z)$ в изолированной особой точке $z_0 \in \overline{\mathbb{C}}$ называется
+$$
+        \mathop{\operatorname{res}}\limits_{z_0}f(z)
+        =
+        \frac{1}{2\pi i}\oint\limits_{\gamma} f(z)\,dz,
+$$
+где $\gamma$ — контур, принадлежащий окрестности точки $z_0$ и охватывающий ее. 
 \end{definition}
+
 \begin{theorem}[Основная теорема о вычетах]
-Если функция f(z) -- аналитическая в $\overline{D}$ за исключением конечного числа особых точек $z_k\in D$, то справедливо равенство (где $C$ — граница области $D$):
-\begin{equation}\label{ch1.rest}
-\oint\limits_{C}f(z)\,dz= 2\pi i \sum_{k=1}^{n} \mathop{\operatorname{res}}\limits_{z_k} f(z),\quad z_k\in D.
-\end{equation}
+        Пусть функция $f(z)$ аналитична в $\overline{D}$ за исключением конечного числа особых точек $z_k\in D$. Тогда справедливо равенство
+$$
+        \oint\limits_{\partial D}f(z)\,dz
+        = 
+        2\pi i \sum_{k=1}^{n} \mathop{\operatorname{res}}\limits_{z_k} f(z),\quad\mbox{где } z_k\in D.
+$$
 \end{theorem}
+
 \begin{assertion}
 Вычет функции в изолированной особой точке равен коэффициенту $c_{-1}$ при первой отрицательной степени в разложении функции в ряд Лорана в окрестности этой точки, т.е. при $\dfrac{1}{z-z_0}$ для $z_0\in \mathbb{C}$, и этому коэффициенту, взятому с противоположным знаком, для $z_0=\infty\colon$
 $$
@@ -101,15 +152,17 @@ $$
 $$
 \end{assertion}
 \begin{assertion}
-Если $z_0$ полюс порядка п функции $f(z),~ z_0\in \mathbb{C}$, то
+Пусть $z_0$ --- полюс порядка п функции $f(z),~ z_0\in \mathbb{C}$. Тогда
 $$
-\mathop{\operatorname{res}}\limits_{z_0}f(z)= \frac{1}{(n-1)!} \lim\limits_{z\to z_0} \frac{d^{n-1}}{dz^{n-1}} \bigl[f(z)\cdot (z-z_0)^n\bigr],\quad z_0-\Pi(n);
+\mathop{\operatorname{res}}\limits_{z_0}f(z)= \frac{1}{(n-1)!} \lim\limits_{z\to z_0} \frac{d^{n-1}}{dz^{n-1}} \bigl[f(z)\cdot (z-z_0)^n\bigr],
 $$
 $$
-\mathop{\operatorname{res}}\limits_{z_0}f(z)= \lim\limits_{z\to z_0} \bigl[f(z)\cdot (z-z_0)\bigr],\quad z_0-\Pi(1).
+\mathop{\operatorname{res}}\limits_{z_0}f(z)= \lim\limits_{z\to z_0} \bigl[f(z)\cdot (z-z_0)\bigr].
 $$ 
 \end{assertion}
-\subsection{Применение вычетов для вычисления интеграла вида $\int\limits_{-\infty}^{+\infty}e^{i\lambda\,x}R(x)$}
+
+
+\subsection{Применение вычетов для вычисления интегралов вида $\int_{-\infty}^{+\infty}e^{i\lambda\,x}g(x)\,dx$}
 Большой интерес представляет возможность применения вычетов для вычисления несобственных интегралов вида $\textstyle{\int\limits_{-\infty}^{+\infty} f(x)dx}$, где интеграл понимается в смысле главного значения, т.е. $\textstyle{\int\limits_{-\infty}^{+\infty} f(x)dx= \lim\limits_{R\to\infty} \int\limits_{-R}^{R}f(x)dx}$ (здесь отрезок $[a,b]=[-R,R]$). 
 
 Будем рассматривать функцию $f(x)$, непрерывную на $(-\infty,+\infty)$. Возможность использования вычетов при решении такой задачи основана на том, что отрезок $[-R,R]$ действительной оси рассматривается как часть замкнутого контура $C$, состоящего из этого отрезка и дуги окружности, а интеграл по контуру записывается в виде суммы:
@@ -148,7 +201,9 @@ $$
 $$
 \end{enumerate}
 \end{assertion}
-\subsection{Ряды и преобразование Фурье}
+
+\clearpage
+\section{Вывод преобразования Фурье}
 Пусть $f(t)$ -- периодическая с периодом $T=2\pi,\: t\in[-\pi,\pi]$.
 $$
 f(t)=a_0+2\sum\limits_{k=1}^{\infty}\left[a_k \cos kt + b_k \sin kt\right],
